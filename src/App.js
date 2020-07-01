@@ -8,6 +8,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     minHeight: "100vh",
     flexDirection: "column",
+    paddingLeft: "0px",
+    paddingRight: "0px",
+    fontFamily: "Roboto,sans-serif",
     [theme.breakpoints.up("md")]: {
       flexDirection: "row",
     },
@@ -16,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: {
       width: "250px",
     },
+  },
+  main: {
+    flexGrow: 1,
   },
 }));
 
@@ -27,7 +33,17 @@ function App() {
       <div className={classes.navbar}>
         <Navbar></Navbar>
       </div>
-      <div className={classes.main}>main</div>
+      <div className={classes.main}>
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa
+          corrupti explicabo, earum, mollitia natus consequatur impedit
+          molestiae hic nesciunt ea officia omnis sint? Voluptatum voluptatem
+          aut alias quibusdam, quo similique excepturi odio architecto, veniam
+          dolorum suscipit deleniti velit magni praesentium exercitationem
+          doloremque expedita accusamus modi sed voluptas aspernatur. Incidunt,
+          assumenda.
+        </div>
+      </div>
     </Container>
   );
 }
