@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Navbar from "./Components/NavBar.js";
+
+import { Container } from "@material-ui/core";
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    minHeight: "100vh",
+    flexDirection: "column",
+    [theme.breakpoints.up("md")]: {
+      flexDirection: "row",
+    },
+  },
+  navbar: {
+    [theme.breakpoints.up("md")]: {
+      width: "250px",
+    },
+  },
+}));
 
 function App() {
+  const classes = useStyles();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container maxWidth="lg" className={classes.root}>
+      <div className={classes.navbar}>
+        <Navbar></Navbar>
+      </div>
+      <div className={classes.main}>main</div>
+    </Container>
   );
 }
 
