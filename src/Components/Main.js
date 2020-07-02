@@ -15,7 +15,7 @@ const Main = ({ selectedCategory }) => {
   return (
     <div className={classes.container}>
       <div className={classes.searchBar}>
-        <SerachBar />
+        <SerachBar selectedCategory={selectedCategory} />
       </div>
       <div className={classes.banner}>baner</div>
       <div className={classes.productList}>productList</div>
