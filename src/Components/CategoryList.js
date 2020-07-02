@@ -4,13 +4,6 @@ import { List, ListItem, ListItemText, Collapse } from "@material-ui/core";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 
-const lista = [
-  "Shirts",
-  "Dresses",
-  ["Jeans", "Skinny", "Relaxed", "Bootcut", "Stright"],
-  "Jackets",
-];
-
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -103,10 +96,10 @@ const CategoryElement = ({
     </>
   );
 };
-export default ({ open, setOpen, selected, setSelected }) => {
+export default ({ open, setOpen, selected, setSelected, categoryList }) => {
   const classes = useStyles();
 
-  return lista.map((element, index) =>
+  return categoryList.map((element, index) =>
     Array.isArray(element) ? (
       <CategoryElement
         setOpen={setOpen}

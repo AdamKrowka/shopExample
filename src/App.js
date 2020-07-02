@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Navbar from "./Components/NavBar.js";
+import Main from "./Components/Main.js";
 
 import { Container } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
@@ -16,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   navbar: {
+    position: "sticky",
+    top: 0,
+    left: 0,
     [theme.breakpoints.up("md")]: {
       width: "250px",
     },
@@ -28,21 +32,31 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const classes = useStyles();
 
+  const [selected, setSelected] = useState({ first: 2, second: 2 });
+  const categoryList = [
+    "Shirts",
+    "Dresses",
+    ["Jeans", "Skinny", "Relaxed", "Bootcut", "Stright"],
+    "Jackets",
+  ];
+
   return (
     <Container maxWidth="lg" className={classes.root}>
       <div className={classes.navbar}>
-        <Navbar></Navbar>
+        <Navbar
+          categoryList={categoryList}
+          selected={selected}
+          setSelected={setSelected}
+        ></Navbar>
       </div>
       <div className={classes.main}>
-        <div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa
-          corrupti explicabo, earum, mollitia natus consequatur impedit
-          molestiae hic nesciunt ea officia omnis sint? Voluptatum voluptatem
-          aut alias quibusdam, quo similique excepturi odio architecto, veniam
-          dolorum suscipit deleniti velit magni praesentium exercitationem
-          doloremque expedita accusamus modi sed voluptas aspernatur. Incidunt,
-          assumenda.
-        </div>
+        <Main
+          selectedCategory={
+            Array.isArray(categoryList[selected.first])
+              ? categoryList[selected.first][0]
+              : categoryList[selected.first]
+          }
+        ></Main>
       </div>
     </Container>
   );

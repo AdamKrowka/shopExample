@@ -10,12 +10,14 @@ const useStyles = makeStyles((theme) => ({
   },
   nav: {
     width: "250px",
-    height: "100%",
     overflowX: "hidden",
     display: "none",
     [theme.breakpoints.up("md")]: {
       display: "flex",
       flexDirection: "column",
+      position: "sticky",
+      top: 0,
+      left: 0,
     },
   },
   mobile: {
@@ -79,10 +81,9 @@ const Logo = (props) => {
   return <div className={classes.logo}>LOGO</div>;
 };
 
-const NavBar = () => {
+const NavBar = ({ categoryList, selected, setSelected }) => {
   const [state, setState] = useState(false);
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState({ first: 2, second: 2 });
   const classes = useStyles();
 
   const toggleDrawer = (open) => (event) => {
@@ -120,6 +121,7 @@ const NavBar = () => {
         setOpen={setOpen}
         selected={selected}
         setSelected={setSelected}
+        categoryList={categoryList}
       />
     </div>
   );
@@ -159,17 +161,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-
-const contactList = (
-  <List component="nav">
-    <ListItem button>
-      <ListItemText primary="Contact" />
-    </ListItem>
-    <ListItem button>
-      <ListItemText primary="Newsletter" />
-    </ListItem>
-    <ListItem button>
-      <ListItemText primary="Subscribe" />
-    </ListItem>
-  </List>
-);
