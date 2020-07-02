@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import Drawer from "@material-ui/core/Drawer";
-import NestedList from "./MenuList.js";
+import CategoryList from "./CategoryList.js";
 
 const useStyles = makeStyles((theme) => ({
   nav: {
@@ -63,6 +63,8 @@ const Logo = (props) => {
 
 const NavBar = () => {
   const [state, setState] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState({ first: 2, second: 2 });
   const classes = useStyles();
 
   const toggleDrawer = (open) => (event) => {
@@ -77,12 +79,9 @@ const NavBar = () => {
   };
   const mobileNavigation = (
     <div className={classes.mobile}>
-      <Logo color="white"></Logo>
-      <div className={classes.hamburgerWrapper}>
-        <MenuIcon
-          className={classes.hamburger}
-          onClick={toggleDrawer(true)}
-        ></MenuIcon>
+      <Logo color="white" />
+      <div className={classes.hamburgerWrapper} onClick={toggleDrawer(true)}>
+        <MenuIcon className={classes.hamburger} />
       </div>
       <Drawer
         transitionDuration={0}
@@ -92,17 +91,27 @@ const NavBar = () => {
         onClose={toggleDrawer(false)}
       >
         <div className={classes.drawerMenu}>
-          <Logo color="black"></Logo>
+          <Logo color="black" />
         </div>
-        <NestedList></NestedList>
+        <CategoryList
+          open={open}
+          setOpen={setOpen}
+          selected={selected}
+          setSelected={setSelected}
+        />
       </Drawer>
     </div>
   );
 
   const navigaion = (
     <div className={classes.nav}>
-      <Logo color="black"></Logo>
-      <NestedList></NestedList>
+      <Logo color="black" />
+      <CategoryList
+        open={open}
+        setOpen={setOpen}
+        selected={selected}
+        setSelected={setSelected}
+      />
     </div>
   );
 
