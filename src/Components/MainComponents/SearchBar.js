@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(3),
   },
   category: {
-    fontStyle: "Montserrat,sans-serif",
+    fontFamily: "Montserrat,sans-serif",
     fontSize: "30px",
   },
   icons: {
@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
   },
   icon: {
     fontSize: "30px",
-    // marginRight: theme.spacing(4),
   },
 }));
 const SerachBar = ({ selectedCategory }) => {

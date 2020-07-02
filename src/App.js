@@ -38,6 +38,9 @@ function App() {
     "Dresses",
     ["Jeans", "Skinny", "Relaxed", "Bootcut", "Stright"],
     "Jackets",
+    "Gymwear",
+    "Blazers",
+    "Shoes",
   ];
 
   return (
