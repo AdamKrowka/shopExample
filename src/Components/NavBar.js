@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { List, ListItem, ListItemText, Drawer } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import Drawer from "@material-ui/core/Drawer";
 import CategoryList from "./CategoryList.js";
 
 const useStyles = makeStyles((theme) => ({
+  container: {
+    height: "100%",
+  },
   nav: {
     width: "250px",
+    height: "100%",
+    overflowX: "hidden",
     display: "none",
     [theme.breakpoints.up("md")]: {
-      display: "block",
+      display: "flex",
+      flexDirection: "column",
     },
   },
   mobile: {
@@ -42,6 +48,18 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerMenu: {
     width: "250px",
+    overflowX: "hidden",
+  },
+  contactNav: {
+    fontSize: "25px",
+  },
+  menu: {
+    paddingBottom: theme.spacing(20),
+  },
+  listItem: {
+    "&:hover": {
+      backgroundColor: "#ccc",
+    },
   },
 }));
 
@@ -77,6 +95,35 @@ const NavBar = () => {
 
     setState(open);
   };
+
+  const navFooter = (
+    <List component="nav">
+      <ListItem className={classes.listItem} button>
+        <ListItemText primary="Contact" />
+      </ListItem>
+      <ListItem className={classes.listItem} button>
+        <ListItemText primary="Newsletter" />
+      </ListItem>
+      <ListItem className={classes.listItem} button>
+        <ListItemText primary="Subscribe" />
+      </ListItem>
+    </List>
+  );
+
+  const menu = (
+    <div className={classes.menu}>
+      <div className={classes.drawerMenu}>
+        <Logo color="black" />
+      </div>
+      <CategoryList
+        open={open}
+        setOpen={setOpen}
+        selected={selected}
+        setSelected={setSelected}
+      />
+    </div>
+  );
+
   const mobileNavigation = (
     <div className={classes.mobile}>
       <Logo color="white" />
@@ -90,33 +137,21 @@ const NavBar = () => {
         open={state}
         onClose={toggleDrawer(false)}
       >
-        <div className={classes.drawerMenu}>
-          <Logo color="black" />
-        </div>
-        <CategoryList
-          open={open}
-          setOpen={setOpen}
-          selected={selected}
-          setSelected={setSelected}
-        />
+        {menu}
+        {navFooter}
       </Drawer>
     </div>
   );
 
   const navigaion = (
     <div className={classes.nav}>
-      <Logo color="black" />
-      <CategoryList
-        open={open}
-        setOpen={setOpen}
-        selected={selected}
-        setSelected={setSelected}
-      />
+      {menu}
+      {navFooter}
     </div>
   );
 
   return (
-    <div>
+    <div className={classes.container}>
       {mobileNavigation}
       {navigaion}
     </div>
@@ -124,3 +159,17 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
+const contactList = (
+  <List component="nav">
+    <ListItem button>
+      <ListItemText primary="Contact" />
+    </ListItem>
+    <ListItem button>
+      <ListItemText primary="Newsletter" />
+    </ListItem>
+    <ListItem button>
+      <ListItemText primary="Subscribe" />
+    </ListItem>
+  </List>
+);
