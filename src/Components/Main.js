@@ -3,13 +3,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import SerachBar from "./MainComponents/SearchBar.js";
 import Banner from "./MainComponents/Banner.js";
 import ProductList from "./MainComponents/ProductList.js";
+import Subscribe from "./MainComponents/Subscribe.js";
 
 const useStyles = makeStyles((theme) => ({
   container: {
     fontFamily: "Montserrat,sans-serif",
     display: "flex",
     flexDirection: "column",
-    height: "300vh",
     paddingLeft: theme.spacing(3),
     paddingRight: theme.spacing(3),
   },
@@ -41,7 +41,9 @@ const Main = ({ selectedCategory }) => {
         <div className={classes.itemsCount}>{products.length} items</div>
         <ProductList productList={products} />
       </div>
-      <div className={classes.subscribe}>subscribe</div>
+      <div className={classes.subscribe}>
+        <Subscribe />
+      </div>
       <div className={classes.contact}>contact</div>
       <div className={classes.footer}>footer</div>
     </div>

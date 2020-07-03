@@ -53,7 +53,13 @@ const ProductCard = ({ product }) => {
   const classes = useStyles();
   const [hovered, setHovered] = useState(false);
   return (
-    <Grid item xs={6} md={3} className={classes.productCard}>
+    <Grid
+      item
+      xs={6}
+      md={3}
+      className={classes.productCard}
+      onClick={() => console.log("clickef")}
+    >
       <div
         className={classes.productImageWrapper}
         onMouseEnter={() => setHovered(true)}
