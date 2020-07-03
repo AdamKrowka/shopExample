@@ -32,6 +32,22 @@ const useStyles = makeStyles((theme) => ({
       display: "block",
     },
   },
+  button: {
+    marginTop: theme.spacing(3),
+    padding: theme.spacing(2),
+    fontSize: "17px",
+    cursor: "pointer",
+    color: "black",
+    backgroundColor: "white",
+    border: "none",
+    letterSpacing: "1px",
+    fontFamily: "Montserrat,sans-serif",
+    "&:hover": {
+      backgroundColor: "black",
+      color: "white",
+      border: "1px solid white",
+    },
+  },
 }));
 
 const Banner = () => {
@@ -42,7 +58,7 @@ const Banner = () => {
       <div className={classes.text}>
         <div className={classes.title}>New arrivals</div>
         <div className={classes.subtitle}>COLLECTION 2020</div>
-        <div>SHOP NOW</div>
+        <button className={classes.button}>SHOP NOW</button>
       </div>
     </div>
   );
