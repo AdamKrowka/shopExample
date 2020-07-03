@@ -4,6 +4,7 @@ import SerachBar from "./MainComponents/SearchBar.js";
 import Banner from "./MainComponents/Banner.js";
 import ProductList from "./MainComponents/ProductList.js";
 import Subscribe from "./MainComponents/Subscribe.js";
+import Contact from "./MainComponents/Contact.js";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -44,7 +45,9 @@ const Main = ({ selectedCategory }) => {
       <div className={classes.subscribe}>
         <Subscribe />
       </div>
-      <div className={classes.contact}>contact</div>
+      <div className={classes.contact}>
+        <Contact />
+      </div>
       <div className={classes.footer}>footer</div>
     </div>
   );

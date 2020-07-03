@@ -5,6 +5,7 @@ const useStyles = makeStyles((theme) => ({
   container: {
     color: "white",
     backgroundColor: "black",
+    marginTop: theme.spacing(5),
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
     paddingLeft: theme.spacing(3),
