@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   container: {
     position: "relative",
+    zIndex: 0,
   },
   text: {
     position: "absolute",

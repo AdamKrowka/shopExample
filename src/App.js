@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   navbar: {
+    zIndex: 2,
     position: "sticky",
     top: 0,
     left: 0,
@@ -41,6 +42,7 @@ function App() {
     "Gymwear",
     "Blazers",
     "Shoes",
+    "DummyProducts",
   ];
 
   return (

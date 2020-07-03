@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import SerachBar from "./MainComponents/SearchBar.js";
 import Banner from "./MainComponents/Banner.js";
+import ProductList from "./MainComponents/ProductList.js";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -12,10 +13,22 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(3),
     paddingRight: theme.spacing(3),
   },
+  itemsCount: {
+    paddingBottom: theme.spacing(2),
+    paddingTop: theme.spacing(2),
+  },
 }));
 
 const Main = ({ selectedCategory }) => {
   const classes = useStyles();
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const getData = async () =>
+      await fetch("http://www.mocky.io/v2/5ab0d1882e0000e60ae8b7a6")
+        .then((res) => res.json())
+        .then((data) => setProducts(data));
+    getData();
+  });
   return (
     <div className={classes.container}>
       <div className={classes.searchBar}>
@@ -24,7 +37,10 @@ const Main = ({ selectedCategory }) => {
       <div className={classes.banner}>
         <Banner />
       </div>
-      <div className={classes.productList}>productList</div>
+      <div className={classes.productList}>
+        <div className={classes.itemsCount}>{products.length} items</div>
+        <ProductList productList={products} />
+      </div>
       <div className={classes.subscribe}>subscribe</div>
       <div className={classes.contact}>contact</div>
       <div className={classes.footer}>footer</div>

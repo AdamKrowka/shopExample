@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   mobile: {
+    zIndex: 100,
     display: "flex",
     alignItems: "strech",
     justifyContent: "space-between",
