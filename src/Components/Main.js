@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "@material-ui/core";
 import SerachBar from "./MainComponents/SearchBar.js";
 import Banner from "./MainComponents/Banner.js";
 import ProductList from "./MainComponents/ProductList.js";
@@ -17,6 +18,22 @@ const useStyles = makeStyles((theme) => ({
   itemsCount: {
     paddingBottom: theme.spacing(2),
     paddingTop: theme.spacing(2),
+  },
+  footer: {
+    marginTop: theme.spacing(8),
+    backgroundColor: "black",
+    color: "white",
+    paddingTop: theme.spacing(8),
+    paddingBottom: theme.spacing(8),
+    // display: "flex",
+    // alignItems: "center",
+    // justifyContent: "center",
+    textAlign: "center",
+    letterSpacing: "1px",
+  },
+  link: {
+    paddingLeft: theme.spacing(1),
+    letterSpacing: "1px",
   },
 }));
 
@@ -48,7 +65,17 @@ const Main = ({ selectedCategory }) => {
       <div className={classes.contact}>
         <Contact />
       </div>
-      <div className={classes.footer}>footer</div>
+      <div className={classes.footer}>
+        Created by Adam Krówka inspired on:
+        <Link
+          className={classes.link}
+          href="https://www.w3schools.com/w3css/tryw3css_templates_clothing_store.htm#"
+          color="inherit"
+          underline="always"
+        >
+          w3schools
+        </Link>
+      </div>
     </div>
   );
 };
