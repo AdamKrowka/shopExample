@@ -25,9 +25,6 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
-    // display: "flex",
-    // alignItems: "center",
-    // justifyContent: "center",
     textAlign: "center",
     letterSpacing: "1px",
   },
@@ -37,16 +34,39 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Main = ({ selectedCategory }) => {
+const Main = ({ selectedCategory, selected }) => {
   const classes = useStyles();
   const [products, setProducts] = useState([]);
+  const [newProducts, setNewProducts] = useState([]);
+
+  useEffect(() => {
+    let tempProducts = [];
+    if (products.length) {
+      products.forEach((product) => {
+        if (
+          product.category.first === selected.first &&
+          product.category.second + 1 === selected.second
+        )
+          tempProducts.push(product);
+      });
+      setNewProducts(tempProducts);
+    }
+  }, [products, selected]);
   useEffect(() => {
     const getData = async () =>
       await fetch("http://www.mocky.io/v2/5ab0d1882e0000e60ae8b7a6")
         .then((res) => res.json())
-        .then((data) => setProducts(data));
+        .then((data) => {
+          const formatedData = data.map((product, index) => {
+            if (index <= 9) product.category = { first: 7, second: 0 };
+            else if (index <= 19) product.category = { first: 7, second: 1 };
+            else if (index <= 29) product.category = { first: 7, second: 2 };
+            return product;
+          });
+          setProducts(formatedData);
+        });
     getData();
-  });
+  }, []);
   return (
     <div className={classes.container}>
       <div className={classes.searchBar}>
@@ -56,8 +76,8 @@ const Main = ({ selectedCategory }) => {
         <Banner />
       </div>
       <div className={classes.productList}>
-        <div className={classes.itemsCount}>{products.length} items</div>
-        <ProductList productList={products} />
+        <div className={classes.itemsCount}>{newProducts.length} items</div>
+        <ProductList productList={newProducts} />
       </div>
       <div className={classes.subscribe}>
         <Subscribe />

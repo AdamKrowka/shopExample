@@ -3,6 +3,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import Navbar from "./Components/NavBar.js";
 import Main from "./Components/Main.js";
 
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import rootReducer from "./Redux/reducers/index.js";
+
 import { Container } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,10 +34,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const store = createStore(rootReducer);
 function App() {
   const classes = useStyles();
 
-  const [selected, setSelected] = useState({ first: 2, second: 2 });
+  const [selected, setSelected] = useState({ first: 7, second: 1 });
+
   const categoryList = [
     "Shirts",
     "Dresses",
@@ -42,28 +48,31 @@ function App() {
     "Gymwear",
     "Blazers",
     "Shoes",
-    "DummyProducts",
+    ["DummyProducts", "1-10", "11-20", "21-30"],
   ];
 
   return (
-    <Container maxWidth="lg" className={classes.root}>
-      <div className={classes.navbar}>
-        <Navbar
-          categoryList={categoryList}
-          selected={selected}
-          setSelected={setSelected}
-        ></Navbar>
-      </div>
-      <div className={classes.main}>
-        <Main
-          selectedCategory={
-            Array.isArray(categoryList[selected.first])
-              ? categoryList[selected.first][0]
-              : categoryList[selected.first]
-          }
-        ></Main>
-      </div>
-    </Container>
+    <Provider store={store}>
+      <Container maxWidth="lg" className={classes.root}>
+        <div className={classes.navbar}>
+          <Navbar
+            categoryList={categoryList}
+            selected={selected}
+            setSelected={setSelected}
+          ></Navbar>
+        </div>
+        <div className={classes.main}>
+          <Main
+            selectedCategory={
+              Array.isArray(categoryList[selected.first])
+                ? categoryList[selected.first][0]
+                : categoryList[selected.first]
+            }
+            selected={selected}
+          ></Main>
+        </div>
+      </Container>
+    </Provider>
   );
 }
 

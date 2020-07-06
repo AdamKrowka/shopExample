@@ -44,7 +44,7 @@ const ListElement = ({
       onClick={setSelect}
     >
       {nested ? (
-        selected.second === index ? (
+        selected.second === index && selected.first === parentIndex ? (
           <ArrowForwardIosIcon />
         ) : null
       ) : selected.first === index ? (
@@ -65,8 +65,7 @@ const CategoryElement = ({
 }) => {
   const classes = useStyles();
   const handleClick = () => {
-    setOpen(!open);
-    setSelected({ ...selected, first: index });
+    setOpen(index);
   };
 
   return (
@@ -97,13 +96,14 @@ const CategoryElement = ({
   );
 };
 export default ({ open, setOpen, selected, setSelected, categoryList }) => {
-  const classes = useStyles();
-
+  const changeOpen = (index) => {
+    setOpen({ ...open, [`open${index}`]: !open[`open${index}`] });
+  };
   return categoryList.map((element, index) =>
     Array.isArray(element) ? (
       <CategoryElement
-        setOpen={setOpen}
-        open={open}
+        setOpen={changeOpen}
+        open={open[`open${index}`]}
         key={index}
         children={element}
         selected={selected}

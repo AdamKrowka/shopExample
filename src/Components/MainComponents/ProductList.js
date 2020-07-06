@@ -3,6 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
+import ProductDialog from "./ProductDialog.js";
+
 const useStyles = makeStyles((theme) => ({
   productCard: {},
   productImageWrapper: {
@@ -52,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
 const ProductCard = ({ product }) => {
   const classes = useStyles();
   const [hovered, setHovered] = useState(false);
+  const [dialogOpend, setDialogOpend] = useState(false);
   return (
     <Grid
       item
@@ -66,7 +69,10 @@ const ProductCard = ({ product }) => {
         onMouseLeave={() => setHovered(false)}
       >
         <img src={product.image} alt="" className={classes.productImage} />
-        <button className={hovered ? classes.buyNow : classes.buyNowHide}>
+        <button
+          className={hovered ? classes.buyNow : classes.buyNowHide}
+          onClick={() => setDialogOpend(true)}
+        >
           Buy Now <ShoppingCartIcon className={classes.icon} />
         </button>
       </div>
@@ -74,12 +80,16 @@ const ProductCard = ({ product }) => {
         <div className={classes.productName}>{product.product_name}</div>
         <div className={classes.productPrice}>{product.price}</div>
       </div>
+      <ProductDialog
+        open={dialogOpend}
+        setOpen={setDialogOpend}
+        product={product}
+      />
     </Grid>
   );
 };
 
 const ProductList = ({ productList }) => {
-  const classes = useStyles();
   return (
     <Grid container spacing={2}>
       {productList.map((product) => (
