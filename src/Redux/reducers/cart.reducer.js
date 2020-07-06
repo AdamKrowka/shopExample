@@ -1,7 +1,7 @@
-const cart = (state = [], action) => {
-  switch (action.type) {
+const cart = (state = [], { type, product, amount }) => {
+  switch (type) {
     case "add_to_cart":
-      return [];
+      return [...state, { product, amount }];
     default:
       return state;
   }

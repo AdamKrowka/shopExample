@@ -56,13 +56,7 @@ const ProductCard = ({ product }) => {
   const [hovered, setHovered] = useState(false);
   const [dialogOpend, setDialogOpend] = useState(false);
   return (
-    <Grid
-      item
-      xs={6}
-      md={3}
-      className={classes.productCard}
-      onClick={() => console.log("clickef")}
-    >
+    <Grid item xs={6} md={3} className={classes.productCard}>
       <div
         className={classes.productImageWrapper}
         onMouseEnter={() => setHovered(true)}

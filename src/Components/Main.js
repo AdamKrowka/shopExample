@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Main = ({ selectedCategory, selected }) => {
+const Main = ({ selectedCategory, selected, cart }) => {
   const classes = useStyles();
   const [products, setProducts] = useState([]);
   const [newProducts, setNewProducts] = useState([]);
