@@ -5,13 +5,16 @@ import App from "./App";
 import ProductPage from "./Components/ProductPageComponents/ProductPage";
 import * as serviceWorker from "./serviceWorker";
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import rootReducer from "./Redux/reducers/index.js";
 
-const store = createStore(rootReducer);
+const store = createStore(
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 ReactDOM.render(
   <Provider store={store}>
     <Router>

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
+import { Grid, Button } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import { connect } from "react-redux";
+import { changeProduct } from "../../Redux/actions/product.actions.js";
+import { useHistory } from "react-router-dom";
 
 import ProductDialog from "./ProductDialog.js";
 
@@ -51,10 +54,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, changeProduct }) => {
+  const history = useHistory();
   const classes = useStyles();
   const [hovered, setHovered] = useState(false);
   const [dialogOpend, setDialogOpend] = useState(false);
+
+  const openProductPage = () => {
+    changeProduct(product);
+    history.push("/productPage");
+  };
   return (
     <Grid item xs={6} md={3} className={classes.productCard}>
       <div
@@ -63,7 +72,6 @@ const ProductCard = ({ product }) => {
         onMouseLeave={() => setHovered(false)}
       >
         <img src={product.image} alt="" className={classes.productImage} />
-        {console.log(product)}
         <button
           className={hovered ? classes.buyNow : classes.buyNowHide}
           onClick={() => setDialogOpend(true)}
@@ -72,7 +80,9 @@ const ProductCard = ({ product }) => {
         </button>
       </div>
       <div>
-        <div className={classes.productName}>{product.product_name}</div>
+        <Button className={classes.productName} onClick={openProductPage}>
+          {product.product_name}
+        </Button>
         <div className={classes.productPrice}>{product.price}</div>
       </div>
       <ProductDialog
@@ -84,14 +94,22 @@ const ProductCard = ({ product }) => {
   );
 };
 
-const ProductList = ({ productList }) => {
+const ProductList = ({ productList, changeProduct }) => {
   return (
     <Grid container spacing={2}>
       {productList.map((product) => (
-        <ProductCard key={product.id} product={product} />
+        <ProductCard
+          key={product.id}
+          product={product}
+          changeProduct={changeProduct}
+        />
       ))}
     </Grid>
   );
 };
 
-export default ProductList;
+const mapDispachToProps = (dispach) => ({
+  changeProduct: (product) => dispach(changeProduct(product)),
+});
+
+export default connect(null, mapDispachToProps)(ProductList);

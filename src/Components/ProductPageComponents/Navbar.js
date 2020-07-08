@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
 
 import { Button, IconButton, Badge } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
@@ -33,7 +34,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Navbar = ({ productsInCart }) => {
+  let history = useHistory();
   const classes = useStyles();
+
+  const handleGoBack = () => {
+    history.push("/");
+  };
   return (
     <div className={classes.navBar}>
       <Logo color={"white"}></Logo>
@@ -48,8 +54,9 @@ const Navbar = ({ productsInCart }) => {
           color="default"
           className={classes.goBackButton}
           startIcon={<ArrowBackIosIcon />}
+          onClick={handleGoBack}
         >
-          to Product List
+          Return
         </Button>
       </div>
     </div>

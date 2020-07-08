@@ -43,7 +43,7 @@ const ProductDialog = ({ open, setOpen, product, addToCart }) => {
   };
 
   useEffect(() => {
-    if (inputValue == 0) setDisabled(true);
+    if (inputValue === 0) setDisabled(true);
     else setDisabled(false);
   }, [inputValue]);
 
