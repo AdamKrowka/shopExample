@@ -3,10 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Navbar from "./Components/NavBar.js";
 import Main from "./Components/Main.js";
 
-import { Provider } from "react-redux";
-import { createStore } from "redux";
-import rootReducer from "./Redux/reducers/index.js";
-
 import { Container } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const store = createStore(rootReducer);
 function App() {
   const classes = useStyles();
 
@@ -52,27 +47,25 @@ function App() {
   ];
 
   return (
-    <Provider store={store}>
-      <Container maxWidth="lg" className={classes.root}>
-        <div className={classes.navbar}>
-          <Navbar
-            categoryList={categoryList}
-            selected={selected}
-            setSelected={setSelected}
-          ></Navbar>
-        </div>
-        <div className={classes.main}>
-          <Main
-            selectedCategory={
-              Array.isArray(categoryList[selected.first])
-                ? categoryList[selected.first][0]
-                : categoryList[selected.first]
-            }
-            selected={selected}
-          ></Main>
-        </div>
-      </Container>
-    </Provider>
+    <Container maxWidth="lg" className={classes.root}>
+      <div className={classes.navbar}>
+        <Navbar
+          categoryList={categoryList}
+          selected={selected}
+          setSelected={setSelected}
+        ></Navbar>
+      </div>
+      <div className={classes.main}>
+        <Main
+          selectedCategory={
+            Array.isArray(categoryList[selected.first])
+              ? categoryList[selected.first][0]
+              : categoryList[selected.first]
+          }
+          selected={selected}
+        ></Main>
+      </div>
+    </Container>
   );
 }
 

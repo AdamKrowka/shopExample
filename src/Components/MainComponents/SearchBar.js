@@ -1,10 +1,11 @@
 import React from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
-import { IconButton } from "@material-ui/core";
+import { IconButton, Badge } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
+import { connect } from "react-redux";
 const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "30px",
   },
 }));
-const SerachBar = ({ selectedCategory }) => {
+const SerachBar = ({ selectedCategory, productsInCart }) => {
   const classes = useStyles();
   return (
     <div className={classes.container}>
@@ -34,11 +35,17 @@ const SerachBar = ({ selectedCategory }) => {
           <SearchIcon className={classes.icon} />
         </IconButton>
         <IconButton color={"inherit"}>
-          <ShoppingCartIcon className={classes.icon} />
+          <Badge badgeContent={productsInCart} color="primary">
+            <ShoppingCartIcon className={classes.icon} />
+          </Badge>
         </IconButton>
       </div>
     </div>
   );
 };
 
-export default SerachBar;
+const mapStateToProps = (state) => ({
+  productsInCart: state.cart.length,
+});
+
+export default connect(mapStateToProps)(SerachBar);

@@ -77,7 +77,7 @@ const useLogoStyles = makeStyles((theme) => ({
   },
 }));
 
-const Logo = (props) => {
+export const Logo = (props) => {
   const classes = useLogoStyles(props);
   return <div className={classes.logo}>LOGO</div>;
 };

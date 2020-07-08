@@ -63,6 +63,7 @@ const ProductCard = ({ product }) => {
         onMouseLeave={() => setHovered(false)}
       >
         <img src={product.image} alt="" className={classes.productImage} />
+        {console.log(product)}
         <button
           className={hovered ? classes.buyNow : classes.buyNowHide}
           onClick={() => setDialogOpend(true)}
