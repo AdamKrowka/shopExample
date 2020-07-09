@@ -60,7 +60,9 @@ const ProductElement = ({
 }) => {
   const classes = useStyles();
   const [inputValue, setInputValue] = useState(+amount);
-  const [cost, setCost] = useState(product.price);
+  const [cost, setCost] = useState(
+    Math.round(+product.price.substring(1) * inputValue * 100) / 100
+  );
   useEffect(() => {
     changeAmount(index, inputValue);
     setCost(Math.round(+product.price.substring(1) * inputValue * 100) / 100);

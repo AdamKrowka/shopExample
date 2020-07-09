@@ -5,7 +5,7 @@ const cart = (state = [], { type, product, amount, index }) => {
 
     case "change_amount":
       state[index].amount = amount;
-      return state;
+      return state.map((e) => e);
     case "remove_from_cart":
       state.splice(index, 1);
       return state.map((e) => e);
