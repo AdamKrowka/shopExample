@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import ProductPage from "./Components/ProductPageComponents/ProductPage";
+import CartPage from "./Components/CartPageComponents/CartPage";
 import * as serviceWorker from "./serviceWorker";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -24,6 +25,9 @@ ReactDOM.render(
         </Route>
         <Route exact path="/productPage">
           <ProductPage />
+        </Route>
+        <Route exact path="/cartPage">
+          <CartPage />
         </Route>
       </Switch>
     </Router>

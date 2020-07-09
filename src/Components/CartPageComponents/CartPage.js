@@ -1,8 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
-import NavBar from "./Navbar.js";
-import ProductInfo from "./ProductInfo.js";
+import NavBar from "../ProductPageComponents/Navbar.js";
+import ProductList from "./ProductList.js";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -21,8 +21,8 @@ const ProductPage = ({ product }) => {
   const classes = useStyles();
   return (
     <div className={classes.container}>
-      <NavBar cartButton className={classes.nav} />
-      <ProductInfo className={classes.content} />
+      <NavBar className={classes.nav} />
+      <ProductList />
     </div>
   );
 };

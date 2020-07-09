@@ -33,22 +33,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Navbar = ({ productsInCart }) => {
+const Navbar = ({ productsInCart, cartButton }) => {
   let history = useHistory();
   const classes = useStyles();
 
   const handleGoBack = () => {
     history.push("/");
   };
+  const handleGoToCart = () => {
+    history.push("/cartPage");
+  };
   return (
     <div className={classes.navBar}>
       <Logo color={"white"}></Logo>
       <div className={classes.arrowWrapper}>
-        <IconButton className={classes.goBackButton}>
-          <Badge badgeContent={productsInCart} color="primary">
-            <ShoppingCartIcon />
-          </Badge>
-        </IconButton>
+        {cartButton ? (
+          <IconButton className={classes.goBackButton} onClick={handleGoToCart}>
+            <Badge badgeContent={productsInCart} color="primary">
+              <ShoppingCartIcon />
+            </Badge>
+          </IconButton>
+        ) : (
+          <></>
+        )}
         <Button
           variant="contained"
           color="default"

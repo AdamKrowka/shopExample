@@ -3,3 +3,14 @@ export const addToCart = (product, amount) => ({
   product,
   amount,
 });
+
+export const changeAmount = (index, amount) => ({
+  type: "change_amount",
+  index,
+  amount,
+});
+
+export const removeProduct = (index) => ({
+  type: "remove_from_cart",
+  index,
+});

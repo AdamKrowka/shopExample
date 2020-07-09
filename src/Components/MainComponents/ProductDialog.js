@@ -12,6 +12,8 @@ import {
   IconButton,
 } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
+import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
 import { addToCart } from "../../Redux/actions/cart.actions.js";
 const useStyles = makeStyles((theme) => ({
   dialogContent: {
@@ -27,6 +29,13 @@ const useStyles = makeStyles((theme) => ({
   dialogButtons: {
     color: "black",
     borderColor: "black",
+  },
+  input: {
+    maxWidth: "5em",
+    height: "2em",
+    border: "1px solid black",
+    borderRadius: "5px",
+    textAlign: "center",
   },
 }));
 const ProductDialog = ({ open, setOpen, product, addToCart }) => {
@@ -73,14 +82,23 @@ const ProductDialog = ({ open, setOpen, product, addToCart }) => {
           How many {product.product_name} you wont add to cart?
         </DialogTitle>
         <DialogContent className={classes.dialogContent}>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="productNumber"
-            type="number"
-            value={inputValue}
-            onChange={handleChange}
-          />
+          <div>
+            <IconButton
+              onClick={() => {
+                if (inputValue > 1) setInputValue(inputValue - 1);
+              }}
+            >
+              <RemoveIcon />
+            </IconButton>
+            <input
+              className={classes.input}
+              value={inputValue}
+              onChange={handleChange}
+            />
+            <IconButton onClick={() => setInputValue(inputValue + 1)}>
+              <AddIcon />
+            </IconButton>
+          </div>
           Cost:$
           {Math.round(+product.price.substring(1) * inputValue * 100) / 100}
         </DialogContent>

@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { IconButton, Badge } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
@@ -26,7 +26,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const SerachBar = ({ selectedCategory, productsInCart }) => {
+  const history = useHistory();
   const classes = useStyles();
+
+  const handleGoToCart = () => {
+    if (productsInCart) history.push("/cartPage");
+  };
   return (
     <div className={classes.container}>
       <div className={classes.category}>{selectedCategory}</div>
@@ -34,7 +39,7 @@ const SerachBar = ({ selectedCategory, productsInCart }) => {
         <IconButton color={"inherit"}>
           <SearchIcon className={classes.icon} />
         </IconButton>
-        <IconButton color={"inherit"}>
+        <IconButton color={"inherit"} onClick={handleGoToCart}>
           <Badge badgeContent={productsInCart} color="primary">
             <ShoppingCartIcon className={classes.icon} />
           </Badge>
