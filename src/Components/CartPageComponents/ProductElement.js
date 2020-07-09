@@ -66,7 +66,7 @@ const ProductElement = ({
   useEffect(() => {
     changeAmount(index, inputValue);
     setCost(Math.round(+product.price.substring(1) * inputValue * 100) / 100);
-  }, [inputValue]);
+  }, [inputValue, changeAmount, index, product.price]);
 
   const handleChange = (e) => {
     if (Number.isInteger(+e.target.value) && +e.target.value > 0)

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
@@ -37,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProductList = ({ cart }) => {
-  const [total, setTotal] = useState(0);
   const classes = useStyles();
   const history = useHistory();
   const handleGoBack = () => {
