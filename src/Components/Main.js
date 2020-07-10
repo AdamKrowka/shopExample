@@ -54,7 +54,7 @@ const Main = ({ selectedCategory, selected, cart }) => {
   }, [products, selected]);
   useEffect(() => {
     const getData = async () =>
-      await fetch("http://www.mocky.io/v2/5ab0d1882e0000e60ae8b7a6")
+      await fetch("https://www.mocky.io/v2/5ab0d1882e0000e60ae8b7a6")
         .then((res) => res.json())
         .then((data) => {
           const formatedData = data.map((product, index) => {
