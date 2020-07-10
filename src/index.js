@@ -6,7 +6,7 @@ import ProductPage from "./Components/ProductPageComponents/ProductPage";
 import CartPage from "./Components/CartPageComponents/CartPage";
 import * as serviceWorker from "./serviceWorker";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter, Switch, Route } from "react-router-dom";
 
 import { Provider } from "react-redux";
 import { createStore } from "redux";
@@ -18,7 +18,7 @@ const store = createStore(
 );
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
+    <HashRouter basename="/">
       <Switch>
         <Route exact path="/">
           <App />
@@ -30,7 +30,7 @@ ReactDOM.render(
           <CartPage />
         </Route>
       </Switch>
-    </Router>
+    </HashRouter>
   </Provider>,
   document.getElementById("root")
 );
