@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Container } from "@material-ui/core";
 import AddressForm from "./AddressForm.js";
 import InvoiceForm from "./InvoiceForm.js";
+import MessageToSeller from "./MessageToSeller.js";
 const useStyles = makeStyles((theme) => ({
   title: {
     display: "flex",
@@ -22,6 +23,7 @@ const PaymentPage = () => {
       <div className={classes.title}>Choose a payment method</div>
       <AddressForm />
       <InvoiceForm />
+      <MessageToSeller />
     </Container>
   );
 };
