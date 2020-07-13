@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Container } from "@material-ui/core";
 import AddressForm from "./AddressForm.js";
-
+import InvoiceForm from "./InvoiceForm.js";
 const useStyles = makeStyles((theme) => ({
   title: {
     display: "flex",
@@ -16,12 +16,12 @@ const useStyles = makeStyles((theme) => ({
 
 const PaymentPage = () => {
   const classes = useStyles();
+
   return (
     <Container maxWidth="md">
       <div className={classes.title}>Choose a payment method</div>
-      <h3>Your address:</h3>
-      <div>Your package will be sent to this address. </div>
       <AddressForm />
+      <InvoiceForm />
     </Container>
   );
 };
