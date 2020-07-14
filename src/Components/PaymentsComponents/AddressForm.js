@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField } from "@material-ui/core";
+import AddressInput from "./Inputs/AddressInput.js";
+import PersonIcon from "@material-ui/icons/Person";
+import HomeIcon from "@material-ui/icons/Home";
+import MarkunreadMailboxIcon from "@material-ui/icons/MarkunreadMailbox";
+import LocationCityIcon from "@material-ui/icons/LocationCity";
+import PublicIcon from "@material-ui/icons/Public";
+import PhoneIcon from "@material-ui/icons/Phone";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -40,69 +47,62 @@ const AddressForm = () => {
       <h3>Your address:</h3>
       <div>Your package will be sent to this address. </div>
       <form noValidate autoComplete="off" className={classes.form}>
-        <TextField
+        <AddressInput
           value={data.name}
           id="name"
           label="Name"
-          variant="outlined"
-          size="small"
-          className={classes.input}
           onChange={handleChange}
-        />
-        <TextField
+        >
+          <PersonIcon />
+        </AddressInput>
+        <AddressInput
           value={data.lastName}
           id="lastName"
           label="Last Name"
-          variant="outlined"
-          size="small"
-          className={classes.input}
           onChange={handleChange}
-        />
-        <TextField
+        >
+          <PersonIcon />
+        </AddressInput>
+        <AddressInput
           value={data.address}
           id="address"
           label="Address"
-          variant="outlined"
-          size="small"
-          className={classes.input}
           onChange={handleChange}
-        />
-        <TextField
+        >
+          <HomeIcon />
+        </AddressInput>
+        <AddressInput
           value={data.postalCode}
           id="postalCode"
           label="Postal Code"
-          variant="outlined"
-          size="small"
-          className={classes.input}
           onChange={handleChange}
-        />
-        <TextField
+        >
+          <MarkunreadMailboxIcon />
+        </AddressInput>
+        <AddressInput
           value={data.city}
           id="city"
           label="City"
-          variant="outlined"
-          size="small"
-          className={classes.input}
           onChange={handleChange}
-        />
-        <TextField
+        >
+          <LocationCityIcon />
+        </AddressInput>
+        <AddressInput
           value={data.country}
           id="country"
           label="Country"
-          variant="outlined"
-          size="small"
-          className={classes.input}
           onChange={handleChange}
-        />
-        <TextField
+        >
+          <PublicIcon />
+        </AddressInput>
+        <AddressInput
           value={data.phoneNumber}
           id="phoneNumber"
           label="Phone Number"
-          variant="outlined"
-          size="small"
-          className={classes.input}
           onChange={handleChange}
-        />
+        >
+          <PhoneIcon />
+        </AddressInput>
       </form>
     </>
   );
