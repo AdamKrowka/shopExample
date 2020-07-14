@@ -54,7 +54,11 @@ const PaymentForm = () => {
           Cash on delivery
         </Button>
       </div>
-      <CreditCardDialog open={openCreditDialog} setOpen={setOpenCreditDialog} />
+      <CreditCardDialog
+        open={openCreditDialog}
+        setOpen={setOpenCreditDialog}
+        setSelected={setSelected}
+      />
     </>
   );
 };

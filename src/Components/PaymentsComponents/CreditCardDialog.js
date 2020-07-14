@@ -37,17 +37,38 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CreditCardDialog = ({ open, setOpen }) => {
+const CreditCardDialog = ({ open, setOpen, setSelected }) => {
+  const [valid, setValidData] = useState({});
+  const [cardData, setCardData] = useState({
+    cardNumber: "",
+    expirationDate: "",
+    securityCode: "",
+  });
   const classes = useStyles();
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const handleClose = () => {
+  const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
+
+  const handleDiscard = () => {
     setOpen(false);
+    setCardData({
+      cardNumber: "",
+      expirationDate: "",
+      securityCode: "",
+    });
+    setSelected(0);
+  };
+
+  const handleSave = () => {
+    setOpen(false);
+  };
+
+  const setValid = (type, validState) => {
+    setValidData({ ...valid, [type]: validState });
   };
 
   return (
     <>
-      <Dialog fullScreen={fullScreen} open={open} onClose={handleClose}>
+      <Dialog fullScreen={fullScreen} open={open} onClose={handleDiscard}>
         <DialogContent>
           <h3>Chose payment method</h3>
           <div>Choose a payment method for this order</div>
@@ -58,24 +79,49 @@ const CreditCardDialog = ({ open, setOpen }) => {
           <form noValidate autoComplete="off">
             <div className={classes.row}>
               <div className={classes.text}>Card Number:</div>
-              <CardNumberInput />
+              <CardNumberInput
+                cardData={cardData}
+                setCardData={setCardData}
+                setValid={setValid}
+              />
             </div>
             <div className={classes.row}>
               <div className={classes.text}>Expired date:</div>
-              <ExpireDateInput />
+              <ExpireDateInput
+                cardData={cardData}
+                setCardData={setCardData}
+                setValid={setValid}
+              />
             </div>
             <div className={classes.row}>
               <div className={classes.text}>CVV2/CVC2:</div>
-              <SecurityCodeInput />
+              <SecurityCodeInput
+                cardData={cardData}
+                setCardData={setCardData}
+                setValid={setValid}
+              />
             </div>
           </form>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
-            Disagree
+          <Button
+            autoFocus
+            onClick={handleDiscard}
+            color="secondary"
+            variant="outlined"
+          >
+            Discard
           </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
-            Agree
+          <Button
+            disabled={
+              !(valid.cardNumber && valid.expirationDate && valid.securityCode)
+            }
+            onClick={handleSave}
+            color="default"
+            autoFocus
+            variant="outlined"
+          >
+            Save
           </Button>
         </DialogActions>
       </Dialog>
