@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { Stepper, Step, StepLabel, StepConnector } from "@material-ui/core";
@@ -86,20 +86,7 @@ function getSteps() {
 
 const CartStepper = ({ activeStep }) => {
   const classes = useStyles();
-  // const [activeStep, setActiveStep] = useState(activeStep);
   const steps = getSteps();
-
-  // const handleNext = () => {
-  //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  // };
-
-  // const handleBack = () => {
-  //   setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  // };
-
-  // const handleReset = () => {
-  //   setActiveStep(0);
-  // };
 
   return (
     <div className={classes.root}>

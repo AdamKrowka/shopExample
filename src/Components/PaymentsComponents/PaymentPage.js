@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Container } from "@material-ui/core";
 import AddressForm from "./AddressForm.js";
 import InvoiceForm from "./InvoiceForm.js";
 import MessageToSeller from "./MessageToSeller.js";
+import PaymentForm from "./PaymentForm.js";
 const useStyles = makeStyles((theme) => ({
   title: {
     display: "flex",
@@ -24,6 +25,7 @@ const PaymentPage = () => {
       <AddressForm />
       <InvoiceForm />
       <MessageToSeller />
+      <PaymentForm />
     </Container>
   );
 };
