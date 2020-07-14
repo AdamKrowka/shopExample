@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
+import CreditCardDialog from "./CreditCardDialog.js";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,8 +21,10 @@ const useStyles = makeStyles((theme) => ({
 const PaymentForm = () => {
   const classes = useStyles();
   const [selected, setSelected] = useState(0);
+  const [openCreditDialog, setOpenCreditDialog] = React.useState(false);
   const handleClick = (index) => {
     setSelected(index);
+    if (index === 1) setOpenCreditDialog(true);
   };
 
   return (
@@ -51,6 +54,7 @@ const PaymentForm = () => {
           Cash on delivery
         </Button>
       </div>
+      <CreditCardDialog open={openCreditDialog} setOpen={setOpenCreditDialog} />
     </>
   );
 };
