@@ -30,7 +30,7 @@ const CartPage = ({ cart }) => {
         {activeStep ? (
           activeStep === 1 ? (
             <>
-              <PaymentPage />
+              <PaymentPage setActiveStep={setActiveStep} />
             </>
           ) : (
             <>

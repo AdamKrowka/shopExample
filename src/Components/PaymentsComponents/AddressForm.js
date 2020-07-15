@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
   input: {
     margin: theme.spacing(1),
   },
+  personName: {
+    display: "flex",
+  },
 }));
 
 const AddressForm = () => {
@@ -47,22 +50,22 @@ const AddressForm = () => {
       <h3>Your address:</h3>
       <div>Your package will be sent to this address. </div>
       <form noValidate autoComplete="off" className={classes.form}>
-        <AddressInput
-          value={data.name}
-          id="name"
-          label="Name"
-          onChange={handleChange}
-        >
-          <PersonIcon />
-        </AddressInput>
-        <AddressInput
-          value={data.lastName}
-          id="lastName"
-          label="Last Name"
-          onChange={handleChange}
-        >
-          <PersonIcon />
-        </AddressInput>
+        <div className={classes.personName}>
+          <AddressInput
+            value={data.name}
+            id="name"
+            label="Name"
+            onChange={handleChange}
+          >
+            <PersonIcon />
+          </AddressInput>
+          <AddressInput
+            value={data.lastName}
+            id="lastName"
+            label="Last Name"
+            onChange={handleChange}
+          ></AddressInput>
+        </div>
         <AddressInput
           value={data.address}
           id="address"

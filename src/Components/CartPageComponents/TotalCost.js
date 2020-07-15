@@ -40,7 +40,7 @@ const TotalCost = ({ cart, buttonAction, buttonText }) => {
       <Divider />
       <div className={classes.totalCost}>
         <h4>Total</h4>
-        <h4>{totalCost}</h4>
+        <h4>${totalCost}</h4>
       </div>
       <Button variant="outlined" onClick={buttonAction}>
         {buttonText}
