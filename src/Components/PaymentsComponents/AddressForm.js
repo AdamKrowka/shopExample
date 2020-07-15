@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { changeData } from "../../Redux/actions/addressData.actions.js";
 import { makeStyles } from "@material-ui/core/styles";
-import { TextField } from "@material-ui/core";
 import AddressInput from "./Inputs/AddressInput.js";
 import PersonIcon from "@material-ui/icons/Person";
 import HomeIcon from "@material-ui/icons/Home";
@@ -24,17 +25,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddressForm = () => {
+const AddressForm = ({ data, setData }) => {
   const classes = useStyles();
-  const [data, setData] = useState({
-    name: "",
-    lastName: "",
-    address: "",
-    postalCode: "",
-    city: "",
-    country: "",
-    phoneNumber: "",
-  });
+  // const [data, setData] = useState({
+  //   name: "",
+  //   lastName: "",
+  //   address: "",
+  //   postalCode: "",
+  //   city: "",
+  //   country: "",
+  //   phoneNumber: "",
+  // });
 
   const handleChange = (e) => {
     let text = e.target.value;
@@ -111,4 +112,9 @@ const AddressForm = () => {
   );
 };
 
-export default AddressForm;
+const mapStateToProps = (store) => ({ data: store.addressData });
+const mapDispatchToProps = (dispach) => ({
+  setData: (data) => dispach(changeData(data)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddressForm);
