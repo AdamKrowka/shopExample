@@ -1,23 +1,25 @@
 {
   "files": {
-    "main.css": "/shopExample/static/css/main.b3f5f183.chunk.css",
-    "main.js": "/shopExample/static/js/main.65bcf61e.chunk.js",
-    "main.js.map": "/shopExample/static/js/main.65bcf61e.chunk.js.map",
+    "main.css": "/shopExample/static/css/main.5fbd10ec.chunk.css",
+    "main.js": "/shopExample/static/js/main.199ae69c.chunk.js",
+    "main.js.map": "/shopExample/static/js/main.199ae69c.chunk.js.map",
     "runtime-main.js": "/shopExample/static/js/runtime-main.3303066d.js",
     "runtime-main.js.map": "/shopExample/static/js/runtime-main.3303066d.js.map",
-    "static/js/2.83d51415.chunk.js": "/shopExample/static/js/2.83d51415.chunk.js",
-    "static/js/2.83d51415.chunk.js.map": "/shopExample/static/js/2.83d51415.chunk.js.map",
+    "static/js/2.2dfd0cdb.chunk.js": "/shopExample/static/js/2.2dfd0cdb.chunk.js",
+    "static/js/2.2dfd0cdb.chunk.js.map": "/shopExample/static/js/2.2dfd0cdb.chunk.js.map",
     "index.html": "/shopExample/index.html",
-    "precache-manifest.c6eba9076aea9d178579d27570c5ce1d.js": "/shopExample/precache-manifest.c6eba9076aea9d178579d27570c5ce1d.js",
+    "precache-manifest.c7951eb9a88d4b3ad5c1b6b7ea1a9b3b.js": "/shopExample/precache-manifest.c7951eb9a88d4b3ad5c1b6b7ea1a9b3b.js",
     "service-worker.js": "/shopExample/service-worker.js",
-    "static/css/main.b3f5f183.chunk.css.map": "/shopExample/static/css/main.b3f5f183.chunk.css.map",
-    "static/js/2.83d51415.chunk.js.LICENSE.txt": "/shopExample/static/js/2.83d51415.chunk.js.LICENSE.txt",
-    "static/media/banner.jpg": "/shopExample/static/media/banner.17bb7686.jpg"
+    "static/css/main.5fbd10ec.chunk.css.map": "/shopExample/static/css/main.5fbd10ec.chunk.css.map",
+    "static/js/2.2dfd0cdb.chunk.js.LICENSE.txt": "/shopExample/static/js/2.2dfd0cdb.chunk.js.LICENSE.txt",
+    "static/media/banner.jpg": "/shopExample/static/media/banner.17bb7686.jpg",
+    "static/media/mastercard.svg": "/shopExample/static/media/mastercard.6376df48.svg",
+    "static/media/visa.svg": "/shopExample/static/media/visa.be3cecee.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.3303066d.js",
-    "static/js/2.83d51415.chunk.js",
-    "static/css/main.b3f5f183.chunk.css",
-    "static/js/main.65bcf61e.chunk.js"
+    "static/js/2.2dfd0cdb.chunk.js",
+    "static/css/main.5fbd10ec.chunk.css",
+    "static/js/main.199ae69c.chunk.js"
   ]
 }
