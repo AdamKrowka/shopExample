@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const CartPage = ({ cart }) => {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = useState(1);
+  const [activeStep, setActiveStep] = useState(0);
   return (
     <div className={classes.container}>
       <NavBar className={classes.nav} />

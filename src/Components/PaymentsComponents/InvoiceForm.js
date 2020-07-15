@@ -16,7 +16,7 @@ const InvoiceForm = () => {
   };
   return (
     <>
-      <h3>Your need invoice?</h3>
+      <h3>Do you need an invoice?</h3>
       <div>
         If you want to receive an invoice for your order, select the option
         below.{" "}

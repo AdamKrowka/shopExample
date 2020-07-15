@@ -2,11 +2,11 @@ import React from "react";
 import { Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
-import { Button, Divider } from "@material-ui/core";
-import ProductElement from "./ProductElement.js";
+import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-
+import ProductElement from "./ProductElement.js";
+import TotalCost from "./TotalCost.js";
 const useStyles = makeStyles((theme) => ({
   arrowBack: {
     color: "white",
@@ -36,13 +36,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProductList = ({ cart }) => {
+const ProductList = ({ cart, setActiveStep }) => {
   const classes = useStyles();
   const history = useHistory();
   const handleGoBack = () => {
     history.push("/");
   };
 
+  const handleCheckout = () => {
+    setActiveStep(1);
+  };
   const ProductList = cart.map((cartElement, index) => {
     return (
       <ProductElement
@@ -54,36 +57,15 @@ const ProductList = ({ cart }) => {
     );
   });
 
-  const totalCost = cart
-    .reduce(
-      (acc, item) =>
-        Math.round(+item.product.price.substring(1) * item.amount * 100) / 100 +
-        acc,
-      0
-    )
-    .toLocaleString("en", { useGrouping: true });
   return (
     <Container maxWidth="md">
       {ProductList.length ? (
         <>
           {ProductList}
-          <Container maxWidth="sm" className={classes.finalPaymentContainer}>
-            <div className={classes.totalCost}>
-              <div>Item ({cart.length}) </div>
-              <div>${totalCost}</div>
-            </div>
-            ,
-            <div className={classes.totalCost}>
-              <div>Shipping</div>
-              <div>Free</div>
-            </div>
-            <Divider />
-            <div className={classes.totalCost}>
-              <h4>Total</h4>
-              <h4>{totalCost}</h4>
-            </div>
-            <Button variant="outlined"> Go to checkout</Button>
-          </Container>
+          <TotalCost
+            buttonAction={handleCheckout}
+            buttonText="Go to checkout"
+          />
         </>
       ) : (
         <div>
