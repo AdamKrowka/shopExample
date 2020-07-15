@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
 import CreditCardDialog from "./CreditCardDialog.js";
+import { changePaymentsMethod } from "../../Redux/actions/payments.actions.js";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,15 +20,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PaymentForm = () => {
+const method = ["", "Credit Card", "Blik", "Cash on Delivery"];
+
+const PaymentForm = ({ setMethod }) => {
   const classes = useStyles();
   const [selected, setSelected] = useState(0);
   const [openCreditDialog, setOpenCreditDialog] = React.useState(false);
   const handleClick = (index) => {
     setSelected(index);
+    setMethod(method[index]);
     if (index === 1) setOpenCreditDialog(true);
   };
 
+  const setSelectedMethod = (index) => {
+    setSelected(index);
+    setMethod(method[index]);
+  };
   return (
     <>
       <h3>Chose payment method</h3>
@@ -57,10 +66,14 @@ const PaymentForm = () => {
       <CreditCardDialog
         open={openCreditDialog}
         setOpen={setOpenCreditDialog}
-        setSelected={setSelected}
+        setSelected={setSelectedMethod}
       />
     </>
   );
 };
 
-export default PaymentForm;
+const mapDispatchToProps = (dispach) => ({
+  setMethod: (data) => dispach(changePaymentsMethod(data)),
+});
+
+export default connect(null, mapDispatchToProps)(PaymentForm);

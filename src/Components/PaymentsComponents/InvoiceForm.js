@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Checkbox, FormControlLabel } from "@material-ui/core";
+import { invoice } from "../../Redux/actions/invoice.actions.js";
 
 const useStyles = makeStyles((theme) => ({
   checkbox: {
@@ -8,8 +10,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const InvoiceForm = () => {
-  const [checked, setChecked] = useState(false);
+const InvoiceForm = ({ checked, setChecked }) => {
   const classes = useStyles();
   const handleCheckboxChange = () => {
     setChecked(!checked);
@@ -37,4 +38,9 @@ const InvoiceForm = () => {
   );
 };
 
-export default InvoiceForm;
+const mapDispatchToProps = (dispach) => ({
+  setChecked: (data) => dispach(invoice(data)),
+});
+const mapStateToProps = (state) => ({ setChecked: state.invoice });
+
+export default connect(mapStateToProps, mapDispatchToProps)(InvoiceForm);

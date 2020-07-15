@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { changeCardData } from "../../Redux/actions/card.actions.js";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Dialog,
@@ -37,13 +39,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CreditCardDialog = ({ open, setOpen, setSelected }) => {
+const CreditCardDialog = ({
+  open,
+  setOpen,
+  setSelected,
+  setCardData,
+  cardData,
+}) => {
   const [valid, setValidData] = useState({});
-  const [cardData, setCardData] = useState({
-    cardNumber: "",
-    expirationDate: "",
-    securityCode: "",
-  });
   const classes = useStyles();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
@@ -128,5 +131,10 @@ const CreditCardDialog = ({ open, setOpen, setSelected }) => {
     </>
   );
 };
+const mapStateToProps = (state) => ({ cardData: state.cardData });
 
-export default CreditCardDialog;
+const mapDispatchToProps = (dispach) => ({
+  setCardData: (data) => dispach(changeCardData(data)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreditCardDialog);

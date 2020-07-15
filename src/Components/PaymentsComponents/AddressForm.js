@@ -27,15 +27,6 @@ const useStyles = makeStyles((theme) => ({
 
 const AddressForm = ({ data, setData }) => {
   const classes = useStyles();
-  // const [data, setData] = useState({
-  //   name: "",
-  //   lastName: "",
-  //   address: "",
-  //   postalCode: "",
-  //   city: "",
-  //   country: "",
-  //   phoneNumber: "",
-  // });
 
   const handleChange = (e) => {
     let text = e.target.value;
