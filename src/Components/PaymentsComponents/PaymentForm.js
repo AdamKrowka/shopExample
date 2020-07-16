@@ -37,7 +37,7 @@ const PaymentForm = ({ setMethod }) => {
     setMethod(method[index]);
   };
   return (
-    <>
+    <div>
       <h3>Chose payment method</h3>
       <div>Choose a payment method for this order</div>
       <div className={classes.root}>
@@ -68,7 +68,7 @@ const PaymentForm = ({ setMethod }) => {
         setOpen={setOpenCreditDialog}
         setSelected={setSelectedMethod}
       />
-    </>
+    </div>
   );
 };
 

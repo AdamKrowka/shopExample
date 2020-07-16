@@ -16,7 +16,7 @@ const MessageToSeller = ({ message, setMessage }) => {
 
   const handleChange = (e) => setMessage(e.target.value);
   return (
-    <>
+    <div>
       <h3>Message to Seller</h3>
       <div>
         If you want to send a message to the seller please enter it below
@@ -30,7 +30,7 @@ const MessageToSeller = ({ message, setMessage }) => {
         multiline
         variant="outlined"
       />
-    </>
+    </div>
   );
 };
 

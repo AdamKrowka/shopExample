@@ -38,7 +38,7 @@ const PaymentPage = ({ setActiveStep }) => {
     setActiveStep(2);
   };
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="sm">
       <div className={classes.title}>Choose a payment method</div>
       <TotalCost buttonAction={handlebackToCart} buttonText="Back to Cart" />
       <AddressForm />

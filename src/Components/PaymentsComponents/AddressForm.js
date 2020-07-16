@@ -38,7 +38,7 @@ const AddressForm = ({ data, setData }) => {
   };
 
   return (
-    <>
+    <div>
       <h3>Your address:</h3>
       <div>Your package will be sent to this address. </div>
       <form noValidate autoComplete="off" className={classes.form}>
@@ -99,7 +99,7 @@ const AddressForm = ({ data, setData }) => {
           <PhoneIcon />
         </AddressInput>
       </form>
-    </>
+    </div>
   );
 };
 

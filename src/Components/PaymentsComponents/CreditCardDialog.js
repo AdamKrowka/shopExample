@@ -70,7 +70,7 @@ const CreditCardDialog = ({
   };
 
   return (
-    <>
+    <div>
       <Dialog fullScreen={fullScreen} open={open} onClose={handleDiscard}>
         <DialogContent>
           <h3>Chose payment method</h3>
@@ -128,7 +128,7 @@ const CreditCardDialog = ({
           </Button>
         </DialogActions>
       </Dialog>
-    </>
+    </div>
   );
 };
 const mapStateToProps = (state) => ({ cardData: state.cardData });

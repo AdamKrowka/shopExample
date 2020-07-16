@@ -7,11 +7,15 @@ import NavBar from "../ProductPageComponents/Navbar.js";
 import ProductList from "./ProductList.js";
 import Stepper from "../PaymentsComponents/Stepper.js";
 import PaymentPage from "../PaymentsComponents/PaymentPage.js";
+import FinalizationPage from "../FinalizationPageComponents/FinalizationPage.js";
 const useStyles = makeStyles((theme) => ({
   container: {
     height: "100vh",
     display: "flex",
     flexDirection: "column",
+  },
+  innerContainer: {
+    marginBottom: theme.spacing(8),
   },
   nav: {
     flexGrow: 0,
@@ -26,15 +30,14 @@ const CartPage = ({ cart }) => {
   return (
     <div className={classes.container}>
       <NavBar className={classes.nav} />
-      <Container maxWidth="md">
+      <Container maxWidth="md" className={classes.innerContainer}>
+        <Stepper activeStep={activeStep} />
         {activeStep ? (
           activeStep === 1 ? (
-            <>
-              <PaymentPage setActiveStep={setActiveStep} />
-            </>
+            <PaymentPage setActiveStep={setActiveStep} />
           ) : (
             <>
-              <h1>Finnish</h1>
+              <FinalizationPage />
             </>
           )
         ) : (
@@ -43,7 +46,6 @@ const CartPage = ({ cart }) => {
             <ProductList setActiveStep={setActiveStep} />
           </>
         )}
-        <Stepper activeStep={activeStep} />
       </Container>
     </div>
   );

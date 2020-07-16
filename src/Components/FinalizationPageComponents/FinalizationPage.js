@@ -1,7 +1,12 @@
 import React from "react";
+import ProductTable from "./ProductTable.js";
 
 const FinalizationPage = () => {
-  return <>Finalization</>;
+  return (
+    <>
+      <ProductTable></ProductTable>
+    </>
+  );
 };
 
 export default FinalizationPage;
