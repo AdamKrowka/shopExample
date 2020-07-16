@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Checkbox, FormControlLabel } from "@material-ui/core";
@@ -41,6 +41,6 @@ const InvoiceForm = ({ checked, setChecked }) => {
 const mapDispatchToProps = (dispach) => ({
   setChecked: (data) => dispach(invoice(data)),
 });
-const mapStateToProps = (state) => ({ setChecked: state.invoice });
+const mapStateToProps = (state) => ({ checked: state.invoice });
 
 export default connect(mapStateToProps, mapDispatchToProps)(InvoiceForm);

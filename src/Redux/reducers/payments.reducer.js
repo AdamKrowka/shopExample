@@ -1,4 +1,4 @@
-const payments = (state = {}, { type, data }) => {
+const payments = (state = "", { type, data }) => {
   switch (type) {
     case "changePaymentMethod":
       return data;

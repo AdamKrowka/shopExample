@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const CartPage = ({ cart }) => {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(2);
   return (
     <div className={classes.container}>
       <NavBar className={classes.nav} />
@@ -37,7 +37,7 @@ const CartPage = ({ cart }) => {
             <PaymentPage setActiveStep={setActiveStep} />
           ) : (
             <>
-              <FinalizationPage />
+              <FinalizationPage setActiveStep={setActiveStep} />
             </>
           )
         ) : (
