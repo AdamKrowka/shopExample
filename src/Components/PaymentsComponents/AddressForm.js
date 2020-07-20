@@ -25,16 +25,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddressForm = ({ data, setData }) => {
+const AddressForm = ({ data, setData, setErrors, errors, valid }) => {
   const classes = useStyles();
 
   const handleChange = (e) => {
     let text = e.target.value;
-    if (e.target.id === "postalCode") {
+    const id = e.target.id;
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [id]: text.length ? true : false,
+    }));
+    if (id === "postalCode") {
       if (text.length === 2) text += "-";
       if (text.length >= 6) text = text.slice(0, 6);
     }
-    setData({ ...data, [e.target.id]: text });
+    setData({ ...data, [id]: text });
   };
 
   return (
@@ -45,6 +50,7 @@ const AddressForm = ({ data, setData }) => {
         <div className={classes.personName}>
           <AddressInput
             value={data.name}
+            error={valid ? false : !Boolean(errors["name"])}
             id="name"
             label="Name"
             onChange={handleChange}
@@ -53,6 +59,7 @@ const AddressForm = ({ data, setData }) => {
           </AddressInput>
           <AddressInput
             value={data.lastName}
+            error={valid ? false : !Boolean(errors["lastName"])}
             id="lastName"
             label="Last Name"
             onChange={handleChange}
@@ -60,6 +67,7 @@ const AddressForm = ({ data, setData }) => {
         </div>
         <AddressInput
           value={data.address}
+          error={valid ? false : !Boolean(errors["address"])}
           id="address"
           label="Address"
           onChange={handleChange}
@@ -68,6 +76,7 @@ const AddressForm = ({ data, setData }) => {
         </AddressInput>
         <AddressInput
           value={data.postalCode}
+          error={valid ? false : !Boolean(errors["postalCode"])}
           id="postalCode"
           label="Postal Code"
           onChange={handleChange}
@@ -76,6 +85,7 @@ const AddressForm = ({ data, setData }) => {
         </AddressInput>
         <AddressInput
           value={data.city}
+          error={valid ? false : !Boolean(errors["city"])}
           id="city"
           label="City"
           onChange={handleChange}
@@ -84,6 +94,7 @@ const AddressForm = ({ data, setData }) => {
         </AddressInput>
         <AddressInput
           value={data.country}
+          error={valid ? false : !Boolean(errors["country"])}
           id="country"
           label="Country"
           onChange={handleChange}
@@ -92,6 +103,7 @@ const AddressForm = ({ data, setData }) => {
         </AddressInput>
         <AddressInput
           value={data.phoneNumber}
+          error={valid ? false : !Boolean(errors["phoneNumber"])}
           id="phoneNumber"
           label="Phone Number"
           onChange={handleChange}

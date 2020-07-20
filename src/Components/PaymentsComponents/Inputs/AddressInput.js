@@ -13,12 +13,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddressInput = ({ children, value, id, label, onChange }) => {
+const AddressInput = ({ children, value, id, label, onChange, error }) => {
   const classes = useStyles();
   return (
     <div className={classes.container}>
       {children}
       <TextField
+        error={error}
         value={value}
         id={id}
         label={label}

@@ -18,21 +18,35 @@ const useStyles = makeStyles((theme) => ({
     border: "1px solid #0ba300",
     marginTop: theme.spacing(1),
   },
+  error: {
+    border: "1px solid red",
+    marginTop: theme.spacing(1),
+  },
 }));
 
 const method = ["", "Credit Card", "Blik", "Cash on Delivery"];
 
-const PaymentForm = ({ setMethod }) => {
+const PaymentForm = ({
+  setMethod,
+  setPaymentValid,
+  paymentValid,
+  paymentError,
+  setPaymentError,
+}) => {
   const classes = useStyles();
   const [selected, setSelected] = useState(0);
   const [openCreditDialog, setOpenCreditDialog] = React.useState(false);
   const handleClick = (index) => {
+    setPaymentValid(true);
+    setPaymentError(false);
     setSelected(index);
     setMethod(method[index]);
     if (index === 1) setOpenCreditDialog(true);
   };
 
   const setSelectedMethod = (index) => {
+    setPaymentValid(true);
+    setPaymentError(false);
     setSelected(index);
     setMethod(method[index]);
   };
@@ -43,21 +57,39 @@ const PaymentForm = ({ setMethod }) => {
       <div className={classes.root}>
         <Button
           onClick={() => handleClick(1)}
-          className={selected === 1 ? classes.selected : classes.button}
+          className={
+            !paymentError
+              ? selected === 1
+                ? classes.selected
+                : classes.button
+              : classes.error
+          }
           variant="outlined"
         >
           Credit Card
         </Button>
         <Button
           onClick={() => handleClick(2)}
-          className={selected === 2 ? classes.selected : classes.button}
+          className={
+            !paymentError
+              ? selected === 2
+                ? classes.selected
+                : classes.button
+              : classes.error
+          }
           variant="outlined"
         >
           BLIK
         </Button>
         <Button
           onClick={() => handleClick(3)}
-          className={selected === 3 ? classes.selected : classes.button}
+          className={
+            !paymentError
+              ? selected === 3
+                ? classes.selected
+                : classes.button
+              : classes.error
+          }
           variant="outlined"
         >
           Cash on delivery
@@ -67,6 +99,7 @@ const PaymentForm = ({ setMethod }) => {
         open={openCreditDialog}
         setOpen={setOpenCreditDialog}
         setSelected={setSelectedMethod}
+        setPaymentValid={setPaymentValid}
       />
     </div>
   );

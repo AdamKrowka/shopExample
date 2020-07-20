@@ -45,6 +45,7 @@ const CreditCardDialog = ({
   setSelected,
   setCardData,
   cardData,
+  setPaymentValid,
 }) => {
   const [valid, setValidData] = useState({});
   const classes = useStyles();
@@ -59,6 +60,7 @@ const CreditCardDialog = ({
       securityCode: "",
     });
     setSelected(0);
+    setPaymentValid(false);
   };
 
   const handleSave = () => {

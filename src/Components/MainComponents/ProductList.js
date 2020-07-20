@@ -69,6 +69,7 @@ const ProductCard = ({ product, changeProduct }) => {
       <div
         className={classes.productImageWrapper}
         onMouseEnter={() => setHovered(true)}
+        onMouseOver={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
         <img src={product.image} alt="" className={classes.productImage} />
