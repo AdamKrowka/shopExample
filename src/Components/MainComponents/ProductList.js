@@ -62,7 +62,7 @@ const ProductCard = ({ product, changeProduct }) => {
 
   const openProductPage = () => {
     changeProduct(product);
-    history.push("/productPage");
+    history.push(`/productPage/${product.id}`);
   };
   return (
     <Grid item xs={6} md={3} className={classes.productCard}>

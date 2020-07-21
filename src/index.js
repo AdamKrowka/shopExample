@@ -23,9 +23,10 @@ ReactDOM.render(
         <Route exact path="/">
           <App />
         </Route>
-        <Route exact path="/productPage">
-          <ProductPage />
-        </Route>
+        <Route
+          path="/productPage/:productID"
+          render={(props) => <ProductPage {...props} />}
+        />
         <Route exact path="/cartPage">
           <CartPage />
         </Route>

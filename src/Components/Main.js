@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
+import { setProductsStore } from "../Redux/actions/products.actions.js";
 import { Link } from "@material-ui/core";
 import SerachBar from "./MainComponents/SearchBar.js";
 import Banner from "./MainComponents/Banner.js";
@@ -34,9 +36,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Main = ({ selectedCategory, selected, cart }) => {
+const Main = ({ selectedCategory, selected, cart, products, setProducts }) => {
   const classes = useStyles();
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
   const [newProducts, setNewProducts] = useState([]);
 
   useEffect(() => {
@@ -64,7 +66,9 @@ const Main = ({ selectedCategory, selected, cart }) => {
             return product;
           });
           setProducts(formatedData);
+          return formatedData;
         });
+
     getData();
   }, []);
   return (
@@ -100,4 +104,10 @@ const Main = ({ selectedCategory, selected, cart }) => {
   );
 };
 
-export default Main;
+const mapDispachToProps = (dispach) => ({
+  setProducts: (products) => dispach(setProductsStore(products)),
+});
+
+const mapStateToProps = (state) => ({ products: state.products });
+
+export default connect(mapStateToProps, mapDispachToProps)(Main);

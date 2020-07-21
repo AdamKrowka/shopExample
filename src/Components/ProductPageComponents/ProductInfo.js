@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core/";
 import { connect } from "react-redux";
+import { changeProduct } from "../../Redux/actions/product.actions.js";
 
 import ProductDialog from "../MainComponents/ProductDialog.js";
 
@@ -49,10 +50,15 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
 }));
-const ProductInfo = ({ product, addToCart }) => {
+const ProductInfo = ({ productID, products }) => {
   const [open, setOpen] = useState(false);
+  const [product, setProduct] = useState();
+
+  useEffect(() => {
+    setProduct(products.find((prod) => +prod.id === +productID));
+  }, [products]);
   const classes = useStyles();
-  return (
+  return product ? (
     <div className={classes.container}>
       <div className={classes.imageContainer}>
         <img src={product.image} alt="" className={classes.image} />
@@ -77,12 +83,11 @@ const ProductInfo = ({ product, addToCart }) => {
         <ProductDialog open={open} setOpen={setOpen} product={product} />
       </div>
     </div>
-  );
+  ) : null;
 };
 
 const mapStateToProps = (state) => ({
-  product: state.product,
-  productsInCart: state.cart.length,
+  products: state.products,
 });
 
 export default connect(mapStateToProps)(ProductInfo);
