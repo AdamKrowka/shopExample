@@ -29,7 +29,6 @@ const methods = ["", "Credit Card", "Blik", "Cash on Delivery"];
 const PaymentForm = ({
   setMethod,
   setPaymentValid,
-  paymentValid,
   paymentError,
   setPaymentError,
 }) => {
