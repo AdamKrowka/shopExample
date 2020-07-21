@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { List, ListItem, ListItemText, Drawer } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -74,12 +75,23 @@ const useLogoStyles = makeStyles((theme) => ({
     fontSize: "30px",
     fontFamily: "Montserrat,sans-serif",
     color: (props) => props.color,
+    "&:hover": {
+      cursor: "pointer",
+    },
   },
 }));
 
 export const Logo = (props) => {
   const classes = useLogoStyles(props);
-  return <div className={classes.logo}>LOGO</div>;
+  const history = useHistory();
+  const handleClick = () => {
+    history.push("/");
+  };
+  return (
+    <div className={classes.logo} onClick={handleClick}>
+      LOGO
+    </div>
+  );
 };
 
 const NavBar = ({ categoryList, selected, setSelected }) => {
