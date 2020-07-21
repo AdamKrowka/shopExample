@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const method = ["", "Credit Card", "Blik", "Cash on Delivery"];
+const methods = ["", "Credit Card", "Blik", "Cash on Delivery"];
 
 const PaymentForm = ({
   setMethod,
@@ -40,7 +40,7 @@ const PaymentForm = ({
     setPaymentValid(true);
     setPaymentError(false);
     setSelected(index);
-    setMethod(method[index]);
+    setMethod(methods[index]);
     if (index === 1) setOpenCreditDialog(true);
   };
 
@@ -48,53 +48,32 @@ const PaymentForm = ({
     setPaymentValid(true);
     setPaymentError(false);
     setSelected(index);
-    setMethod(method[index]);
+    setMethod(methods[index]);
   };
+
+  const Buttons = methods.map((method, index) =>
+    index ? (
+      <Button
+        key={index}
+        onClick={() => handleClick(index)}
+        className={
+          !paymentError
+            ? selected === index
+              ? classes.selected
+              : classes.button
+            : classes.error
+        }
+        variant="outlined"
+      >
+        {method}
+      </Button>
+    ) : null
+  );
   return (
     <div>
       <h3>Chose payment method</h3>
       <div>Choose a payment method for this order</div>
-      <div className={classes.root}>
-        <Button
-          onClick={() => handleClick(1)}
-          className={
-            !paymentError
-              ? selected === 1
-                ? classes.selected
-                : classes.button
-              : classes.error
-          }
-          variant="outlined"
-        >
-          Credit Card
-        </Button>
-        <Button
-          onClick={() => handleClick(2)}
-          className={
-            !paymentError
-              ? selected === 2
-                ? classes.selected
-                : classes.button
-              : classes.error
-          }
-          variant="outlined"
-        >
-          BLIK
-        </Button>
-        <Button
-          onClick={() => handleClick(3)}
-          className={
-            !paymentError
-              ? selected === 3
-                ? classes.selected
-                : classes.button
-              : classes.error
-          }
-          variant="outlined"
-        >
-          Cash on delivery
-        </Button>
-      </div>
+      <div className={classes.root}>{Buttons}</div>
       <CreditCardDialog
         open={openCreditDialog}
         setOpen={setOpenCreditDialog}
