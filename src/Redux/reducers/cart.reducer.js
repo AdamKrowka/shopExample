@@ -4,11 +4,20 @@ const cart = (
 ) => {
   switch (type) {
     case "add_to_cart":
-      localStorage.setItem(
-        "shopCart",
-        JSON.stringify([...state, { product, amount }])
+      const productIndex = state.findIndex(
+        (prod) => prod.product.id === product.id
       );
-      return [...state, { product, amount }];
+      if (productIndex === -1) {
+        localStorage.setItem(
+          "shopCart",
+          JSON.stringify([...state, { product, amount }])
+        );
+        return [...state, { product, amount }];
+      } else {
+        state[productIndex].amount += amount;
+        localStorage.setItem("shopCart", JSON.stringify([...state]));
+        return [...state];
+      }
 
     case "change_amount":
       state[index].amount = amount;

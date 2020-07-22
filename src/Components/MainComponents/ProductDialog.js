@@ -1,74 +1,84 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Snackbar,
-  IconButton,
-} from "@material-ui/core";
+import { Dialog, Divider, IconButton, Avatar, Button } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
-import AddIcon from "@material-ui/icons/Add";
-import RemoveIcon from "@material-ui/icons/Remove";
-import { addToCart } from "../../Redux/actions/cart.actions.js";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useTheme } from "@material-ui/core/styles";
+import RecomendedProduct from "./RecomendedProduct.js";
+
 const useStyles = makeStyles((theme) => ({
-  dialogContent: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
+  dialog: {
+    padding: theme.spacing(2),
   },
+  title: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  avatar: {
+    width: theme.spacing(12),
+    height: theme.spacing(12),
+    marginRight: theme.spacing(3),
+  },
+  info: {
+    padding: theme.spacing(3),
+    display: "flex",
+  },
+  textInfo: {},
+  price: { marginBottom: theme.spacing(1) },
   buttons: {
+    marginTop: theme.spacing(3),
     display: "flex",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
+    marginBottom: theme.spacing(3),
   },
-  dialogButtons: {
-    color: "black",
-    borderColor: "black",
-  },
-  input: {
-    maxWidth: "5em",
-    height: "2em",
-    border: "1px solid black",
-    borderRadius: "5px",
-    textAlign: "center",
+  recomended: {
+    display: "flex",
   },
 }));
-const ProductDialog = ({ open, setOpen, product, addToCart }) => {
-  const classes = useStyles();
-  const [inputValue, setInputValue] = useState(1);
-  const [disabled, setDisabled] = useState(false);
 
-  const [openSnackbar, setOpenSnackbar] = useState(false);
+const getRandom = (arr, n) => {
+  const result = new Array(n);
+  let len = arr.length;
+  const taken = new Array(len);
+  if (n > len)
+    throw new RangeError("getRandom: more elements taken than available");
+  while (n--) {
+    const x = Math.floor(Math.random() * len);
+    result[n] = arr[x in taken ? taken[x] : x];
+    taken[x] = --len in taken ? taken[len] : len;
+  }
+  return result;
+};
+
+const ProductDialog = ({ open, setOpen, product, products }) => {
+  const classes = useStyles();
+  const history = useHistory();
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
+  const [fullWidth, setFullWidth] = useState(true);
+
   const handleClose = () => {
     setOpen(false);
   };
-  const handleChange = (e) => {
-    if (e.target.value >= 0) setInputValue(e.target.value);
+
+  const goToRecomendedProduct = (id) => {
+    history.push(`/productPage/${id}`);
+    history.go();
   };
 
-  useEffect(() => {
-    if (inputValue === 0) setDisabled(true);
-    else setDisabled(false);
-  }, [inputValue]);
-
-  const handleCloseSnackbar = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpenSnackbar(false);
+  const handleGoToCart = () => {
+    history.push("/cartPage");
   };
 
-  const handleAddToCart = () => {
-    addToCart(product, inputValue);
-
-    setOpenSnackbar(true);
-    setOpen(false);
-  };
+  const recomendedPRoducts = getRandom(products, 3).map((prod, index) => (
+    <RecomendedProduct
+      key={index}
+      product={prod}
+      goToRecomendedProduct={goToRecomendedProduct}
+    />
+  ));
 
   return (
     <div>
@@ -76,77 +86,44 @@ const ProductDialog = ({ open, setOpen, product, addToCart }) => {
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
+        fullScreen={fullScreen}
+        fullWidth={fullWidth}
       >
-        <DialogTitle id="form-dialog-title">
-          How many {product.product_name} you wont add to cart?
-        </DialogTitle>
-        <DialogContent className={classes.dialogContent}>
-          <div>
-            <IconButton
-              onClick={() => {
-                if (inputValue > 1) setInputValue(inputValue - 1);
-              }}
-            >
-              <RemoveIcon />
-            </IconButton>
-            <input
-              className={classes.input}
-              value={inputValue}
-              onChange={handleChange}
-            />
-            <IconButton onClick={() => setInputValue(inputValue + 1)}>
-              <AddIcon />
+        <div className={classes.dialog}>
+          <div className={classes.title}>
+            <h2>You have added product to cart</h2>
+            <IconButton aria-label="close" onClick={handleClose}>
+              <CloseIcon />
             </IconButton>
           </div>
-          Cost:$
-          {Math.round(+product.price.substring(1) * inputValue * 100) / 100}
-        </DialogContent>
-        <DialogActions className={classes.buttons}>
-          <Button
-            onClick={handleClose}
-            color="primary"
-            className={classes.dialogButtons}
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={handleAddToCart}
-            color="primary"
-            className={classes.dialogButtons}
-            disabled={disabled}
-          >
-            Add To Cart
-          </Button>
-        </DialogActions>
+          <Divider />
+          <div className={classes.info}>
+            <Avatar
+              variant="rounded"
+              className={classes.avatar}
+              src={product.image}
+            />
+            <div className={classes.textInfo}>
+              <h3 className={classes.price}>{product.price}</h3>
+              <div>{product.product_name}</div>
+            </div>
+          </div>
+          <Divider />
+          <div className={classes.buttons}>
+            <Button onClick={handleClose}>Back to shopping</Button>
+            <Button variant="outlined" onClick={handleGoToCart}>
+              Go to cart
+            </Button>
+          </div>
+          <Divider />
+          <h3>Recomended products</h3>
+          <div className={classes.recomended}>{recomendedPRoducts}</div>
+        </div>
       </Dialog>
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        open={openSnackbar}
-        autoHideDuration={3000}
-        onClose={handleCloseSnackbar}
-        message="Product Successfully added to cart!"
-        action={
-          <React.Fragment>
-            <IconButton
-              size="small"
-              aria-label="close"
-              color="inherit"
-              onClick={handleCloseSnackbar}
-            >
-              <CloseIcon fontSize="small" />
-            </IconButton>
-          </React.Fragment>
-        }
-      />
     </div>
   );
 };
 
-const mapDispachToProps = (dispach) => ({
-  addToCart: (product, amount) => dispach(addToCart(product, amount)),
-});
+const mapStateToProps = (state) => ({ products: state.products });
 
-export default connect(null, mapDispachToProps)(ProductDialog);
+export default connect(mapStateToProps)(ProductDialog);

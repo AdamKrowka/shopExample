@@ -4,6 +4,7 @@ import { Grid, Button } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { connect } from "react-redux";
 import { changeProduct } from "../../Redux/actions/product.actions.js";
+import { addToCart } from "../../Redux/actions/cart.actions.js";
 import { useHistory } from "react-router-dom";
 
 import ProductDialog from "./ProductDialog.js";
@@ -54,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProductCard = ({ product, changeProduct }) => {
+const ProductCard = ({ product, changeProduct, addToCart }) => {
   const history = useHistory();
   const classes = useStyles();
   const [hovered, setHovered] = useState(false);
@@ -63,6 +64,11 @@ const ProductCard = ({ product, changeProduct }) => {
   const openProductPage = () => {
     changeProduct(product);
     history.push(`/productPage/${product.id}`);
+  };
+
+  const handleAddToCart = () => {
+    setDialogOpend(true);
+    addToCart(product, 1);
   };
   return (
     <Grid item xs={6} md={3} className={classes.productCard}>
@@ -75,7 +81,7 @@ const ProductCard = ({ product, changeProduct }) => {
         <img src={product.image} alt="" className={classes.productImage} />
         <button
           className={hovered ? classes.buyNow : classes.buyNowHide}
-          onClick={() => setDialogOpend(true)}
+          onClick={handleAddToCart}
         >
           Buy Now <ShoppingCartIcon className={classes.icon} />
         </button>
@@ -95,7 +101,7 @@ const ProductCard = ({ product, changeProduct }) => {
   );
 };
 
-const ProductList = ({ productList, changeProduct }) => {
+const ProductList = ({ productList, changeProduct, addToCart }) => {
   return (
     <Grid container spacing={2}>
       {productList.map((product) => (
@@ -103,6 +109,7 @@ const ProductList = ({ productList, changeProduct }) => {
           key={product.id}
           product={product}
           changeProduct={changeProduct}
+          addToCart={addToCart}
         />
       ))}
     </Grid>
@@ -111,6 +118,7 @@ const ProductList = ({ productList, changeProduct }) => {
 
 const mapDispachToProps = (dispach) => ({
   changeProduct: (product) => dispach(changeProduct(product)),
+  addToCart: (product, amount) => dispach(addToCart(product, amount)),
 });
 
 export default connect(null, mapDispachToProps)(ProductList);

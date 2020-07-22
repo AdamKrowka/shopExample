@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core/";
 import { connect } from "react-redux";
-import { changeProduct } from "../../Redux/actions/product.actions.js";
+import { addToCart } from "../../Redux/actions/cart.actions.js";
 
 import ProductDialog from "../MainComponents/ProductDialog.js";
 
@@ -50,9 +50,14 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
 }));
-const ProductInfo = ({ productID, products }) => {
+const ProductInfo = ({ productID, products, addToCart }) => {
   const [open, setOpen] = useState(false);
   const [product, setProduct] = useState();
+
+  const handleAddToCart = () => {
+    addToCart(product, 1);
+    setOpen(true);
+  };
 
   useEffect(() => {
     setProduct(products.find((prod) => +prod.id === +productID));
@@ -76,7 +81,7 @@ const ProductInfo = ({ productID, products }) => {
         <Button
           variant="outlined"
           className={classes.button}
-          onClick={() => setOpen(true)}
+          onClick={handleAddToCart}
         >
           Add to Cart
         </Button>
@@ -90,4 +95,8 @@ const mapStateToProps = (state) => ({
   products: state.products,
 });
 
-export default connect(mapStateToProps)(ProductInfo);
+const mapDispachToProps = (dispach) => ({
+  addToCart: (product, amount) => dispach(addToCart(product, amount)),
+});
+
+export default connect(mapStateToProps, mapDispachToProps)(ProductInfo);
