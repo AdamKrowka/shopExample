@@ -70,7 +70,7 @@ const Main = ({ selectedCategory, selected, cart, products, setProducts }) => {
         });
 
     getData();
-  }, []);
+  }, [setProducts]);
   return (
     <div className={classes.container}>
       <div className={classes.searchBar}>

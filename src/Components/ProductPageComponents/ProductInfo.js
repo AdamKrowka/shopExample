@@ -61,7 +61,7 @@ const ProductInfo = ({ productID, products, addToCart }) => {
 
   useEffect(() => {
     setProduct(products.find((prod) => +prod.id === +productID));
-  }, [products]);
+  }, [products, productID]);
   const classes = useStyles();
   return product ? (
     <div className={classes.container}>

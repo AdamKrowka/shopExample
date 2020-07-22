@@ -57,7 +57,7 @@ const ProductDialog = ({ open, setOpen, product, products }) => {
   const history = useHistory();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
-  const [fullWidth, setFullWidth] = useState(true);
+  const [fullWidth] = useState(true);
 
   const handleClose = () => {
     setOpen(false);

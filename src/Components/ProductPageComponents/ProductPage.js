@@ -37,7 +37,7 @@ const ProductPage = ({ match, setProducts }) => {
         });
 
     getData();
-  }, []);
+  }, [setProducts]);
 
   const classes = useStyles();
   return (
