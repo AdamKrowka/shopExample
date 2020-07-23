@@ -25,22 +25,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddressForm = ({ data, setData, setErrors, errors, valid }) => {
+const AddressForm = ({ setErrors, errors }) => {
   const classes = useStyles();
-
-  const handleChange = (e) => {
-    let text = e.target.value;
-    const id = e.target.id;
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [id]: text.length ? true : false,
-    }));
-    if (id === "postalCode") {
-      if (text.length === 2) text += "-";
-      if (text.length >= 6) text = text.slice(0, 6);
-    }
-    setData({ ...data, [id]: text });
-  };
 
   return (
     <div>
@@ -48,66 +34,28 @@ const AddressForm = ({ data, setData, setErrors, errors, valid }) => {
       <div>Your package will be sent to this address. </div>
       <form noValidate autoComplete="off" className={classes.form}>
         <div className={classes.personName}>
-          <AddressInput
-            value={data.name}
-            error={valid ? false : !Boolean(errors["name"])}
-            id="name"
-            label="Name"
-            onChange={handleChange}
-          >
+          <AddressInput error={errors} id="name" label="Name">
             <PersonIcon />
           </AddressInput>
           <AddressInput
-            value={data.lastName}
-            error={valid ? false : !Boolean(errors["lastName"])}
+            error={errors}
             id="lastName"
             label="Last Name"
-            onChange={handleChange}
           ></AddressInput>
         </div>
-        <AddressInput
-          value={data.address}
-          error={valid ? false : !Boolean(errors["address"])}
-          id="address"
-          label="Address"
-          onChange={handleChange}
-        >
+        <AddressInput error={errors} id="address" label="Address">
           <HomeIcon />
         </AddressInput>
-        <AddressInput
-          value={data.postalCode}
-          error={valid ? false : !Boolean(errors["postalCode"])}
-          id="postalCode"
-          label="Postal Code"
-          onChange={handleChange}
-        >
+        <AddressInput error={errors} id="postalCode" label="Postal Code">
           <MarkunreadMailboxIcon />
         </AddressInput>
-        <AddressInput
-          value={data.city}
-          error={valid ? false : !Boolean(errors["city"])}
-          id="city"
-          label="City"
-          onChange={handleChange}
-        >
+        <AddressInput error={errors} id="city" label="City">
           <LocationCityIcon />
         </AddressInput>
-        <AddressInput
-          value={data.country}
-          error={valid ? false : !Boolean(errors["country"])}
-          id="country"
-          label="Country"
-          onChange={handleChange}
-        >
+        <AddressInput error={errors} id="country" label="Country">
           <PublicIcon />
         </AddressInput>
-        <AddressInput
-          value={data.phoneNumber}
-          error={valid ? false : !Boolean(errors["phoneNumber"])}
-          id="phoneNumber"
-          label="Phone Number"
-          onChange={handleChange}
-        >
+        <AddressInput error={errors} id="phoneNumber" label="Phone Number">
           <PhoneIcon />
         </AddressInput>
       </form>

@@ -42,6 +42,16 @@ const allValid = (obj) => {
   return true;
 };
 
+const masks = {
+  name: /^[a-zA-Z]+$/,
+  lastName: /^[a-zA-Z]+$/,
+  address: /^.+$/,
+  city: /^.+$/,
+  country: /^.+$/,
+  postalCode: /^[0-9]{2}[-][0-9]{3}$/,
+  phoneNumber: /^[+]?([0-9]{2}\s?)?[0-9]{9}$/,
+};
+
 const PaymentPage = ({ setActiveStep, address }) => {
   const [errors, setErrors] = useState({});
   const [valid, setValid] = useState(true);
@@ -66,12 +76,21 @@ const PaymentPage = ({ setActiveStep, address }) => {
     setActiveStep(0);
   };
 
+  const checkAddressValidation = () => {
+    const addressErrors = { ...errors };
+    console.log(addressErrors);
+    Object.keys(masks).forEach((mask) => {
+      addressErrors[mask] = !masks[mask].test(address[mask]);
+    });
+    setErrors(addressErrors);
+  };
+
   const handleGoToFinish = () => {
     if (allValid(address) && paymentValid) setActiveStep(2);
     else {
       if (!paymentValid) setPaymentError(true);
       setValid(false);
-      setErrors(address);
+      checkAddressValidation();
       handleClick();
     }
   };

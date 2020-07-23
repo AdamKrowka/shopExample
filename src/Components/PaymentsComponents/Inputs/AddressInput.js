@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { changeData } from "../../../Redux/actions/addressData.actions.js";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField } from "@material-ui/core";
 
@@ -13,14 +15,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddressInput = ({ children, value, id, label, onChange, error }) => {
+const AddressInput = ({ children, id, label, error, data, setData }) => {
   const classes = useStyles();
+  const onChange = (e) => {
+    let text = e.target.value;
+    if (id === "postalCode") {
+      if (text.length === 2) text += "-";
+      if (text.length >= 6) text = text.slice(0, 6);
+    }
+    setData({ ...data, [id]: text });
+  };
   return (
     <div className={classes.container}>
       {children}
       <TextField
-        error={error}
-        value={value}
+        error={error[id]}
+        value={data[id]}
         id={id}
         label={label}
         variant="outlined"
@@ -32,4 +42,9 @@ const AddressInput = ({ children, value, id, label, onChange, error }) => {
   );
 };
 
-export default AddressInput;
+const mapStateToProps = (store) => ({ data: store.addressData });
+const mapDispatchToProps = (dispach) => ({
+  setData: (data) => dispach(changeData(data)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddressInput);

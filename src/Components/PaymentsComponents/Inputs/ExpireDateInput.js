@@ -12,13 +12,17 @@ const ExpireDateInput = ({ cardData, setCardData, setValid }) => {
       setCardData({ ...cardData, expirationDate: text });
     }
 
-    if (text.replace("/", "").length >= 4) setValid("expirationDate", true);
+    if (/^(([0][1-9])|([1][0-2]))[/][2-3][0-9]$/.test(text))
+      setValid("expirationDate", true);
     else setValid("expirationDate", false);
   };
 
   const checkValidity = (e) => {
-    const text = e.target.value.replace("/", "");
-    if (text.length !== 4 && text.length !== 0) setError(true);
+    const text = e.target.value;
+    if (!/^(([0][1-9])|([1][0-2]))[/][2-3][0-9]$/.test(text) && text.length) {
+      setError(true);
+      setValid("expirationDate", false);
+    }
   };
   const clearError = () => {
     setError(false);
