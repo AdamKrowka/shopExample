@@ -83,8 +83,8 @@ const PaymentForm = ({
   );
 };
 
-const mapDispatchToProps = (dispach) => ({
-  setMethod: (data) => dispach(changePaymentsMethod(data)),
+const mapDispatchToProps = (dispatch) => ({
+  setMethod: (data) => dispatch(changePaymentsMethod(data)),
 });
 
 export default connect(null, mapDispatchToProps)(PaymentForm);

@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "30px",
   },
 }));
-const SerachBar = ({ selectedCategory, productsInCart }) => {
+const SearchBar = ({ selectedCategory, productsInCart }) => {
   const history = useHistory();
   const classes = useStyles();
 
@@ -53,4 +53,4 @@ const mapStateToProps = (state) => ({
   productsInCart: state.cart.length,
 });
 
-export default connect(mapStateToProps)(SerachBar);
+export default connect(mapStateToProps)(SearchBar);

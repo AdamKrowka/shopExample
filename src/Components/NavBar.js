@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   mobile: {
     zIndex: 100,
     display: "flex",
-    alignItems: "strech",
+    alignItems: "stretch",
     justifyContent: "space-between",
     backgroundColor: "black",
     [theme.breakpoints.up("md")]: {
@@ -158,7 +158,7 @@ const NavBar = ({ categoryList, selected, setSelected }) => {
     </div>
   );
 
-  const navigaion = (
+  const navigation = (
     <div className={classes.nav}>
       {menu}
       {navFooter}
@@ -168,7 +168,7 @@ const NavBar = ({ categoryList, selected, setSelected }) => {
   return (
     <div className={classes.container}>
       {mobileNavigation}
-      {navigaion}
+      {navigation}
     </div>
   );
 };

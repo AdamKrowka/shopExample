@@ -76,7 +76,7 @@ const PaymentPage = ({ setActiveStep, address }) => {
     setOpen(false);
   };
 
-  const handlebackToCart = () => {
+  const handleBackToCart = () => {
     setActiveStep(0);
   };
 
@@ -102,7 +102,7 @@ const PaymentPage = ({ setActiveStep, address }) => {
   return (
     <Container maxWidth="sm">
       <div className={classes.title}>Choose a payment method</div>
-      <TotalCost buttonAction={handlebackToCart} buttonText="Back to Cart" />
+      <TotalCost buttonAction={handleBackToCart} buttonText="Back to Cart" />
       <AddressForm setErrors={setErrors} errors={errors} valid={valid} />
       <InvoiceForm />
       <MessageToSeller />

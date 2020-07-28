@@ -116,9 +116,9 @@ const ProductElement = ({
   );
 };
 
-const mapDispachToProps = (dispach) => ({
-  changeAmount: (index, amount) => dispach(changeAmount(index, amount)),
-  removeProduct: (index) => dispach(removeProduct(index)),
+const mapDispatchToProps = (dispatch) => ({
+  changeAmount: (index, amount) => dispatch(changeAmount(index, amount)),
+  removeProduct: (index) => dispatch(removeProduct(index)),
 });
 
-export default connect(null, mapDispachToProps)(ProductElement);
+export default connect(null, mapDispatchToProps)(ProductElement);

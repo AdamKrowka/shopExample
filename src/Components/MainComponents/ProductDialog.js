@@ -6,7 +6,7 @@ import { Dialog, Divider, IconButton, Avatar, Button } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
-import RecomendedProduct from "./RecomendedProduct.js";
+import RecommendedProduct from "./RecommendedProduct.js";
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     marginBottom: theme.spacing(3),
   },
-  recomended: {
+  recommended: {
     display: "flex",
   },
 }));
@@ -63,7 +63,7 @@ const ProductDialog = ({ open, setOpen, product, products }) => {
     setOpen(false);
   };
 
-  const goToRecomendedProduct = (id) => {
+  const goToRecommendedProduct = (id) => {
     history.push(`/productPage/${id}`);
     history.go();
   };
@@ -72,11 +72,11 @@ const ProductDialog = ({ open, setOpen, product, products }) => {
     history.push("/cartPage");
   };
 
-  const recomendedPRoducts = getRandom(products, 3).map((prod, index) => (
-    <RecomendedProduct
+  const recommendedProducts = getRandom(products, 3).map((prod, index) => (
+    <RecommendedProduct
       key={index}
       product={prod}
-      goToRecomendedProduct={goToRecomendedProduct}
+      goToRecommendedProduct={goToRecommendedProduct}
     />
   ));
 
@@ -116,8 +116,8 @@ const ProductDialog = ({ open, setOpen, product, products }) => {
             </Button>
           </div>
           <Divider />
-          <h3>Recomended products</h3>
-          <div className={classes.recomended}>{recomendedPRoducts}</div>
+          <h3>Recommended products</h3>
+          <div className={classes.recommended}>{recommendedProducts}</div>
         </div>
       </Dialog>
     </div>

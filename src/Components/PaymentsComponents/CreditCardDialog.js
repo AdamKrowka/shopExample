@@ -135,8 +135,8 @@ const CreditCardDialog = ({
 };
 const mapStateToProps = (state) => ({ cardData: state.cardData });
 
-const mapDispatchToProps = (dispach) => ({
-  setCardData: (data) => dispach(changeCardData(data)),
+const mapDispatchToProps = (dispatch) => ({
+  setCardData: (data) => dispatch(changeCardData(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreditCardDialog);

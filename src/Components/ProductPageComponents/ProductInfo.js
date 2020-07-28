@@ -97,7 +97,7 @@ const mapStateToProps = (state) => ({
   products: state.products,
 });
 
-const mapDispatchToProps = (dispach) => ({
+const mapDispatchToProps = (dispatch) => ({
   addToCart: (product, amount) => dispatch(addToCart(product, amount)),
 });
 

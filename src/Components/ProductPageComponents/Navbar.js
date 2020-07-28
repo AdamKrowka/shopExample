@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   navBar: {
     zIndex: 100,
     display: "flex",
-    alignItems: "strech",
+    alignItems: "stretch",
     justifyContent: "space-between",
     backgroundColor: "black",
   },

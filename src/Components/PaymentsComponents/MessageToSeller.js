@@ -34,8 +34,8 @@ const MessageToSeller = ({ message, setMessage }) => {
   );
 };
 
-const mapDispatchToProps = (dispach) => ({
-  setMessage: (data) => dispach(message(data)),
+const mapDispatchToProps = (dispatch) => ({
+  setMessage: (data) => dispatch(message(data)),
 });
 const mapStateToProps = (state) => ({ message: state.message });
 

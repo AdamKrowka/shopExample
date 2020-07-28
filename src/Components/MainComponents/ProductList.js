@@ -59,7 +59,7 @@ const ProductCard = ({ product, changeProduct, addToCart }) => {
   const history = useHistory();
   const classes = useStyles();
   const [hovered, setHovered] = useState(false);
-  const [dialogOpend, setDialogOpend] = useState(false);
+  const [dialogOpened, setDialogOpened] = useState(false);
 
   const openProductPage = () => {
     changeProduct(product);
@@ -67,7 +67,7 @@ const ProductCard = ({ product, changeProduct, addToCart }) => {
   };
 
   const handleAddToCart = () => {
-    setDialogOpend(true);
+    setDialogOpened(true);
     addToCart(product, 1);
   };
   return (
@@ -93,8 +93,8 @@ const ProductCard = ({ product, changeProduct, addToCart }) => {
         <div className={classes.productPrice}>{product.price}</div>
       </div>
       <ProductDialog
-        open={dialogOpend}
-        setOpen={setDialogOpend}
+        open={dialogOpened}
+        setOpen={setDialogOpened}
         product={product}
       />
     </Grid>
@@ -116,9 +116,9 @@ const ProductList = ({ productList, changeProduct, addToCart }) => {
   );
 };
 
-const mapDispachToProps = (dispach) => ({
-  changeProduct: (product) => dispach(changeProduct(product)),
-  addToCart: (product, amount) => dispach(addToCart(product, amount)),
+const mapDispatchToProps = (dispatch) => ({
+  changeProduct: (product) => dispatch(changeProduct(product)),
+  addToCart: (product, amount) => dispatch(addToCart(product, amount)),
 });
 
-export default connect(null, mapDispachToProps)(ProductList);
+export default connect(null, mapDispatchToProps)(ProductList);

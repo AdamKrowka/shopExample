@@ -38,8 +38,8 @@ const InvoiceForm = ({ checked, setChecked }) => {
   );
 };
 
-const mapDispatchToProps = (dispach) => ({
-  setChecked: (data) => dispach(invoice(data)),
+const mapDispatchToProps = (dispatch) => ({
+  setChecked: (data) => dispatch(invoice(data)),
 });
 const mapStateToProps = (state) => ({ checked: state.invoice });
 

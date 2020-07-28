@@ -43,8 +43,8 @@ const AddressInput = ({ children, id, label, error, data, setData }) => {
 };
 
 const mapStateToProps = (store) => ({ data: store.addressData });
-const mapDispatchToProps = (dispach) => ({
-  setData: (data) => dispach(changeData(data)),
+const mapDispatchToProps = (dispatch) => ({
+  setData: (data) => dispatch(changeData(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddressInput);

@@ -5,14 +5,14 @@ import { Avatar, Button, ButtonBase } from "@material-ui/core";
 import { addToCart } from "../../Redux/actions/cart.actions.js";
 
 const useStyles = makeStyles((theme) => ({
-  recomended: {
+  recommended: {
     display: "flex",
   },
-  avatarRecomended: {
+  avatarRecommended: {
     width: theme.spacing(18),
     height: theme.spacing(18),
   },
-  recomendedInfo: {
+  recommendedInfo: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -33,13 +33,13 @@ const useStyles = makeStyles((theme) => ({
       cursor: "pointer",
     },
   },
-  recomendedButton: {
+  recommendedButton: {
     width: "100%",
     color: theme.palette.success.dark,
   },
 }));
 
-const RecomendedProduct = ({ product, goToRecomendedProduct, addToCart }) => {
+const RecommendedProduct = ({ product, goToRecommendedProduct, addToCart }) => {
   const classes = useStyles();
   const [text, setText] = useState("Add to Cart");
   const [disabled, setDisabled] = useState(false);
@@ -50,21 +50,21 @@ const RecomendedProduct = ({ product, goToRecomendedProduct, addToCart }) => {
     setDisabled(true);
   };
   return (
-    <div className={classes.recomendedInfo}>
+    <div className={classes.recommendedInfo}>
       <ButtonBase
-        onClick={() => goToRecomendedProduct(product.id)}
+        onClick={() => goToRecommendedProduct(product.id)}
         className={classes.buttonBase}
       >
         <Avatar
           variant="square"
-          className={classes.avatarRecomended}
+          className={classes.avatarRecommended}
           src={product.image}
         />
         <h4>{product.price}</h4>
         <div>{product.product_name}</div>
       </ButtonBase>
       <Button
-        className={classes.recomendedButton}
+        className={classes.recommendedButton}
         onClick={handleAddToCart}
         disabled={disabled}
       >
@@ -74,8 +74,8 @@ const RecomendedProduct = ({ product, goToRecomendedProduct, addToCart }) => {
   );
 };
 
-const mapDispachToProps = (dispach) => ({
-  addToCart: (product, amount) => dispach(addToCart(product, amount)),
+const mapDispatchToProps = (dispatch) => ({
+  addToCart: (product, amount) => dispatch(addToCart(product, amount)),
 });
 
-export default connect(null, mapDispachToProps)(RecomendedProduct);
+export default connect(null, mapDispatchToProps)(RecommendedProduct);
