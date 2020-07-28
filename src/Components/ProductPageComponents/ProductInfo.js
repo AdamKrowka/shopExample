@@ -88,15 +88,17 @@ const ProductInfo = ({ productID, products, addToCart }) => {
         <ProductDialog open={open} setOpen={setOpen} product={product} />
       </div>
     </div>
-  ) : null;
+  ) : (
+    <div>product does not exist</div>
+  );
 };
 
 const mapStateToProps = (state) => ({
   products: state.products,
 });
 
-const mapDispachToProps = (dispach) => ({
-  addToCart: (product, amount) => dispach(addToCart(product, amount)),
+const mapDispatchToProps = (dispach) => ({
+  addToCart: (product, amount) => dispatch(addToCart(product, amount)),
 });
 
-export default connect(mapStateToProps, mapDispachToProps)(ProductInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductInfo);

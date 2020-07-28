@@ -36,12 +36,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const allValid = (obj) => {
-  for (const o in obj) if (!obj[o]) return false;
-
-  return true;
-};
-
 const masks = {
   name: /^[a-zA-Z]+$/,
   lastName: /^[a-zA-Z]+$/,
@@ -49,7 +43,7 @@ const masks = {
   city: /^.+$/,
   country: /^.+$/,
   postalCode: /^[0-9]{2}[-][0-9]{3}$/,
-  phoneNumber: /^[+]?([0-9]{2}\s?)?[0-9]{9}$/,
+  phoneNumber: /^([+][0-9]{2}\s*)?([0-9]\s*){9}$/,
 };
 
 const PaymentPage = ({ setActiveStep, address }) => {
@@ -62,6 +56,16 @@ const PaymentPage = ({ setActiveStep, address }) => {
 
   const handleClick = () => {
     setOpen(true);
+  };
+  const allValid = () => {
+    const addressErrors = { ...errors };
+    console.log(addressErrors);
+    Object.keys(masks).forEach((mask) => {
+      addressErrors[mask] = masks[mask].test(address[mask]);
+    });
+    for (const o in addressErrors) if (!addressErrors[o]) return false;
+
+    return true;
   };
 
   const handleClose = (event, reason) => {
@@ -86,6 +90,7 @@ const PaymentPage = ({ setActiveStep, address }) => {
   };
 
   const handleGoToFinish = () => {
+    checkAddressValidation();
     if (allValid(address) && paymentValid) setActiveStep(2);
     else {
       if (!paymentValid) setPaymentError(true);
