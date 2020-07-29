@@ -38,12 +38,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const getRandom = (arr, n) => {
+export const getRandom = (arr, n) => {
   const result = new Array(n);
   let len = arr.length;
   const taken = new Array(len);
-  if (n > len)
-    throw new RangeError("getRandom: more elements taken than available");
+  if (n > len) return getRandom(arr, n - 1);
   while (n--) {
     const x = Math.floor(Math.random() * len);
     result[n] = arr[x in taken ? taken[x] : x];
@@ -65,7 +64,7 @@ const ProductDialog = ({ open, setOpen, product, products }) => {
 
   const goToRecommendedProduct = (id) => {
     history.push(`/productPage/${id}`);
-    history.go();
+    setOpen(false);
   };
 
   const handleGoToCart = () => {

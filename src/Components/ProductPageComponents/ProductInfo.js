@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { addToCart } from "../../Redux/actions/cart.actions.js";
 
 import ProductDialog from "../MainComponents/ProductDialog.js";
+import ProductNotFound from "./ProductNotFound.js";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -89,7 +90,7 @@ const ProductInfo = ({ productID, products, addToCart }) => {
       </div>
     </div>
   ) : (
-    <div>product does not exist</div>
+    <ProductNotFound />
   );
 };
 
