@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField } from "@material-ui/core";
 
-const SecurityCodeInput = ({ cardData, setCardData, setValid }) => {
+const SecurityCodeInput = ({ cardData, setCardData, setValid, validate }) => {
   const [error, setError] = useState(false);
+  useEffect(() => {
+    setValid(
+      "securityCode",
+      cardData.securityCode.replace(/\s/g, "").length >= 3
+    );
+  }, [validate]);
   const handleChange = (e) => {
     let text = e.target.value;
     if (Number.isInteger(+text) && text.length < 4)
       setCardData({ ...cardData, securityCode: text });
-
-    if (text.replace(/\s/g, "").length >= 3) setValid("securityCode", true);
-    else setValid("securityCode", false);
+    setValid("securityCode", text.replace(/\s/g, "").length >= 3);
   };
 
   const checkValidity = (e) => {

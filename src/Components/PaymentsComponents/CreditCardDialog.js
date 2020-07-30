@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { changeCardData } from "../../Redux/actions/card.actions.js";
+import {
+  changeCardData,
+  validateCardData,
+} from "../../Redux/actions/card.actions.js";
+
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Dialog,
@@ -46,12 +50,17 @@ const CreditCardDialog = ({
   setCardData,
   cardData,
   setPaymentValid,
+  valid,
+  setValidData,
 }) => {
-  const [valid, setValidData] = useState({});
+  const [validate, setValidate] = useState(false);
   const classes = useStyles();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
 
+  useEffect(() => {
+    setValidate((v) => !v);
+  }, []);
   const handleDiscard = () => {
     setOpen(false);
     setCardData({
@@ -68,7 +77,8 @@ const CreditCardDialog = ({
   };
 
   const setValid = (type, validState) => {
-    setValidData({ ...valid, [type]: validState });
+    console.log(type, validState);
+    setValidData(type, validState);
   };
 
   return (
@@ -88,6 +98,7 @@ const CreditCardDialog = ({
                 cardData={cardData}
                 setCardData={setCardData}
                 setValid={setValid}
+                validate={validate}
               />
             </div>
             <div className={classes.row}>
@@ -133,10 +144,14 @@ const CreditCardDialog = ({
     </div>
   );
 };
-const mapStateToProps = (state) => ({ cardData: state.cardData });
+const mapStateToProps = (state) => ({
+  cardData: state.cardData,
+  valid: state.cardDataValidator,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   setCardData: (data) => dispatch(changeCardData(data)),
+  setValidData: (element, value) => dispatch(validateCardData(element, value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreditCardDialog);

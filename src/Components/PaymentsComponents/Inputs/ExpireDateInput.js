@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField } from "@material-ui/core";
+const regEx = /^(([0][1-9])|([1][0-2]))[/][2-3][0-9]$/;
 
-const ExpireDateInput = ({ cardData, setCardData, setValid }) => {
+const ExpireDateInput = ({ cardData, setCardData, setValid, validate }) => {
   const [error, setError] = useState(false);
+
+  useEffect(() => {
+    setValid("expirationDate", regEx.test(cardData.expirationDate));
+  }, [validate]);
   const handleChange = (e) => {
     let text = e.target.value;
     text = text.replace("/", "");
@@ -11,15 +16,12 @@ const ExpireDateInput = ({ cardData, setCardData, setValid }) => {
       if (arrayText) text = arrayText.join("/");
       setCardData({ ...cardData, expirationDate: text });
     }
-
-    if (/^(([0][1-9])|([1][0-2]))[/][2-3][0-9]$/.test(text))
-      setValid("expirationDate", true);
-    else setValid("expirationDate", false);
+    setValid("expirationDate", regEx.test(text));
   };
 
   const checkValidity = (e) => {
     const text = e.target.value;
-    if (!/^(([0][1-9])|([1][0-2]))[/][2-3][0-9]$/.test(text) && text.length) {
+    if (!regEx.test(text) && text.length) {
       setError(true);
       setValid("expirationDate", false);
     }

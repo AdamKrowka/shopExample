@@ -8,6 +8,7 @@ import payments from "./payments.reducer.js";
 import cardData from "./card.reducer.js";
 import invoice from "./invoice.reducer.js";
 import message from "./messageToSeller.reducer.js";
+import cardDataValidator from "./cardDataValidator.reducer.js";
 
 export default combineReducers({
   cart,
@@ -18,4 +19,5 @@ export default combineReducers({
   cardData,
   invoice,
   message,
+  cardDataValidator,
 });
